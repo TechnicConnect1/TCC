@@ -1,9 +1,9 @@
 //Importações
 const express = require('express');
 const router = express.Router();
-const upload = require("../helpers/upload/uploadImage");
+const upload = require("../../helpers/upload/uploadImage");
 
-const authController = require('../controller/authController');
+const authController = require('../controller/UserController/UserAuthController');
 const OTPController = require('../controller/OTPController');
 
 // Rota de Registro

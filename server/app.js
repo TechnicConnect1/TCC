@@ -6,6 +6,6 @@ const connection = require('./DB/database');
 // Confirmação da conexão
 console.log(connection);
 
-app.listen(3000, () => {
+app.listen(process.env.API_PORT, () => {
     console.log(`*-------------------------------------*\n    API Inicializada com sucesso!\n           Database Online!    \n*-------------------------------------*`)
 });

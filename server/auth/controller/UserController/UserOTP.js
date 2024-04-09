@@ -11,7 +11,7 @@ exports.emailOTP = async (req, res) => {
         const salt = await bcrypt.genSalt(12);
         const OTPHash = await bcrypt.hash(otp, salt);
         const Id = req.params.id;
-        const user = await User.findById(userId);
+        const user = await User.findById(cod_user);
         const email = user.email;
         transporter.sendMail({
             from: {
@@ -26,7 +26,7 @@ exports.emailOTP = async (req, res) => {
         });
 
         const newOTPVerification = await new EmailOTP({
-            userId: userId,
+            userId: Id,
             uniqueString: OTPHash,
             createdAt: Date.now(),
             expiresAt: Date.now() + 3600000,
@@ -37,7 +37,7 @@ exports.emailOTP = async (req, res) => {
         res.status(200).json({
             msg: 'E-mail enviado no seu Inbox.',
             data: {
-                userId: userId,
+                user: cod_user,
                 email: email
             }
         });
@@ -50,14 +50,14 @@ exports.emailOTP = async (req, res) => {
 /* Rota para confirmação de OTP */
 exports.confirmOTP = async (req, res) => {
     const { otp } = req.body;
-    const userId = req.params.id;
+    const Id = req.params.id;
     try {
-        if (!userId || !otp) {
+        if (!Id || !otp) {
             res.status(422).json({ msg: 'E-mail ou código de verificação inválidos.' })
             return;
         };
 
-        const otpMatch = await EmailOTP.findOne({ userId: userId });
+        const otpMatch = await EmailOTP.findOne({ userId: Id });
 
         if (otpMatch === null) {
             res.status(422).json({ msg: 'Nenhum código de verificação encontrado.' });
@@ -74,9 +74,9 @@ exports.confirmOTP = async (req, res) => {
 
         const validOTP = await bcrypt.compare(otp, OTPHash);
 
-        await User.updateOne({ cod_user: userId }, { verified: true });
+        await User.updateOne({ cod_user: Id }, { verified: true });
 
-        await EmailOTP.deleteOne({ userId: userId });
+        await EmailOTP.deleteOne({ userId: Id });
 
         return res.status(200).json({ validOTP });
     } catch (error) {

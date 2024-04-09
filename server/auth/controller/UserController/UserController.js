@@ -15,7 +15,7 @@ function checkToken(req, res, next) {
     try {
         const secret = process.env.SECRET;
         const decoded = jwt.verify(token, secret);
-        req.user = decoded.user; // Adiciona o usuário decodificado ao objeto de solicitação para acesso nas rotas protegidas
+        req.user = decoded.user;
         next();
     } catch (error) {
         res.status(401).json({ msg: 'Token inválido.' });
@@ -32,7 +32,7 @@ exports.publicRoute = (req, res) => {
 // Rota Privada
 exports.privateRoute = async (req, res) => {
     try {
-        const userId = req.params.id; // Obtém o ID do usuário do objeto de solicitação
+        const userId = req.params.id; 
         const user = await User.findById(userId, '-password');
 
         if (!user) {

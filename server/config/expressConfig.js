@@ -1,8 +1,8 @@
 // Importações
 const express = require('express');
-const userRoutes = require('../routes/userRoutes');
-const authRoutes = require('../routes/authRoutes');
-const accountRoutes = require('../routes/accountRoutes');
+const userRoutes = require('../auth/routes/userRoutes');
+const authRoutes = require('../auth/routes/authRoutes');
+const accountRoutes = require('../auth/routes/accountRoutes');
 const app = express();
 const cors = require('cors');
 const helmet = require('helmet');

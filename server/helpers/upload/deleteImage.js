@@ -1,5 +1,4 @@
-/*
-const {initializeApp} = require("firebase/app");
+/*const {initializeApp} = require("firebase/app");
 const {getStorage, ref, deleteObject} = require("firebase/storage");
 require("dotenv").config();
 const firebaseConfig = {...};
