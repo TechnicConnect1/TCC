@@ -1,0 +1,6 @@
+export * from "./Home/Home"
+export * from "./Feed/Feed"
+export * from "./Orcamento/Orcamento"
+export * from "./Servicos/Servico"
+export* from "./Login/Login"
+export* from "./Cadastro/Cadastro"
