@@ -1,0 +1,141 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 100px;
+    border-top: 1px solid rgb(109, 103, 103, 0.8);
+}
+
+.icons-footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    max-width: 150px;
+}
+
+.icone {
+    background-color: #282727;
+    width: 40px;
+    color: white;
+    font-size: 22px;
+    height: 40px;
+    padding: 0.5rem;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.icone:hover{
+    background-color: #1e8efb;
+    box-shadow: 0 0 20px #1e8efb;
+    color: black;
+    scale: 1.1;
+}
+
+.footer h3{
+    font-weight: 700;
+    color: white;
+    font-size: 25px;
+}
+
+.footer h4{
+    color: #1e8efb;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.content-footer{
+    display: flex;
+    justify-content: right;
+    gap: 20rem;
+}
+
+ul{
+    list-style: none;
+}
+
+ul li a{
+    font-size: 22px;
+    line-height: 3;
+    color: white;
+    text-decoration: none;
+}
+
+.Last-footer {
+    background: #1e8efb;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.Last-footer p {
+    margin-bottom: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .footer {
+        display: flex;
+        flex-direction: column; /* Altera o layout para coluna em telas menores */
+        align-items: center;
+        padding: 2rem 20px; /* Reduz o preenchimento lateral */
+        border-top: 1px solid rgba(109, 103, 103, 0.8);
+    }
+    
+    .icons-footer {
+        margin-top: 1rem; /* Reduz a margem superior */
+        margin-bottom: 4rem;
+        max-width: 100%;
+        display: flex;
+        justify-content: center; /* Centraliza os ícones */
+
+    }
+    
+    /* .icone{
+        gap: 10px;
+    } */
+
+    .footer h3 {
+        font-size: 20px; /* Reduz o tamanho do título */
+        margin-bottom: 0.5rem; /* Adiciona uma margem inferior menor */
+    }
+    
+    ul li a {
+        font-size: 18px; /* Reduz o tamanho do texto */
+        line-height: 2; /* Reduz o espaçamento entre as linhas */
+    }
+    
+    .Last-footer p {
+        font-size: 1rem; /* Reduz o tamanho do texto */
+    }
+    
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .content-footer {
+        display: flex;
+        gap: 10rem;
+    }
+
+}
+
+@media screen and (max-width: 630px) {
+    .content-footer {
+        display: flex;
+        gap: 5rem;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .content-footer {
+        display: flex;
+        gap: 1rem;
+    }
+
+}
+
