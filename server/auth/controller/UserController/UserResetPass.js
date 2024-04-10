@@ -1,5 +1,5 @@
 const User = require('../../model/User');
-const transporter = require('../../config/OTPConfig');
+const transporter = require('../../../config/OTPConfig');
 const EmailOTP = require('../../model/EmailOTP');
 const bcrypt = require('bcrypt');
 

@@ -26,7 +26,7 @@ exports.register = async (req, res) => {
         return res.status(422).json({ msg: 'A senha deve conter entre 6 e 15 caracteres e incluir pelo menos uma letra maiúscula, um número e um caractere especial.' });
     };
 
-    if (!/^(?:+55)?(?:[1-9]{2})?(?:9[1-9]\d{3}\d{4})$/.test(contact)) {
+    if (!/^(?:\+55)?(?:[1-9]{2})?(?:9[1-9]\d{3})\d{4}$/.test(contact)) {
         return res.status(422).json({ msg: 'Insira um número de telefone válido!' });
     };
 

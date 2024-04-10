@@ -4,7 +4,7 @@ const router = express.Router();
 const upload = require("../../helpers/upload/uploadImage");
 
 const authController = require('../controller/UserController/UserAuthController');
-const OTPController = require('../controller/OTPController');
+const OTPController = require('../controller/UserController/UserOTP');
 
 // Rota de Registro
 router.post('/auth/register', upload.single("file"), authController.register);

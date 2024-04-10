@@ -1,6 +1,6 @@
-const sequelize = require(sequelize);
-const connection = require("..database/database");
-const Technician = require('../../model/Technician');
+const sequelize = require('sequelize');
+const connection = require("../../DB/database");
+const Technician = require('./Technician');
 
 const EmailOTP = connection.define(
     "emailOTP",
@@ -16,11 +16,11 @@ const EmailOTP = connection.define(
             allowNull: false
         },
         createdAt:{
-            type: sequelize.DATETIME,
+            type: sequelize.DATE(),
             allowNull: false
         },
         expiresAt:{
-            type: sequelize.DATETIME,
+            type: sequelize.DATE(),
             allowNull: false
         },                
     }
