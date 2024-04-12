@@ -1,0 +1,61 @@
+.feed-1,
+.feed-2,
+.feed-3 {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 8%;
+    display: flex;
+    align-items: center;
+    background: #121212;
+    overflow: hidden;
+}
+
+.feed-2,
+.feed-3 {
+    background-color: #1C1C1C;
+}
+
+.circle{
+    z-index: 500;
+}
+
+.circle5{
+    position: absolute;
+    top: 0;
+    right: -70px;
+    width: 100%;
+    height: 100%;
+    background: #4C4C4C;
+    clip-path: circle(45% at bottom right);
+}
+
+.feed-girl{
+    position: absolute;
+    bottom: 0;
+    right: -250px;
+    z-index: 501;
+}
+
+.content-feed{
+    max-width: 1000px;
+}
+
+
+.btn-feed{
+    background-color: transparent;
+    padding: 15px 40px;
+    border: 4px solid #1e8efb;
+    color: #1e8efb;
+    font-weight: bold;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.content-feed h1{
+    margin-bottom: 4rem;
+}
+
+
+
