@@ -2,7 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import { Navbar } from './components/Navbar/Navbar';
 import { Footer } from './components/Footer/Footer';
 import GlobalStyle from './styles/global';
-import { Servico, Orcamento,  Home, Cadastro, Login, Feed} from './pages';
+import { Servico, Orcamento, Home, Cadastro, Login, Feed} from './pages';
+import {Orcamento1} from './pages/Orcamento1/Orcamento1';
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
         <Route path='/servico' element={<Servico />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/orcamento' element={<Orcamento />} />
+        <Route path='/orcamento1' element={<Orcamento1 />} />
         <Route path='/cadastro' element={<Cadastro />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/profileuser' element={<profileuser/>}/>
+       
       </Routes>
       <Footer />
     </div>
