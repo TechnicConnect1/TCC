@@ -6,15 +6,15 @@ const jwt = require('jsonwebtoken');
 
 /* Rota de Registro */
 exports.register = async (req, res) => {
-    const { name, email, password, confirmPassword, verified, contact, birth_day, main_device } = req.body;
+    const { username, email, password, confirmPassword, verified, contact, birth_day, main_device, user_picture, picture_url } = req.body;
     const file = req.file;
 
     // Validação de Dados
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
         return res.status(422).json({ msg: 'Por favor, preencha todos os campos obrigatórios!' });
     };
 
-    if (!/^[a-zA-Z ]*$/.test(name)) {
+    if (!/^[a-zA-Z ]*$/.test(username)) {
         return res.status(422).json({ msg: 'Por favor, digite um nome válido!' });
     };
 
@@ -38,9 +38,9 @@ exports.register = async (req, res) => {
         return res.status(422).json({ msg: 'As senhas não coincidem!' });
     };
 
-    if (!file) {
+    /*if (!file) {
         return res.status(422).json({ msg: 'Não há imagem!' });
-    };
+    };*/
 
     // Checar se o Usuário existe
     const userExists = await User.findOne({ email: email });
@@ -54,21 +54,22 @@ exports.register = async (req, res) => {
     const passwordHash = await bcrypt.hash(password, salt);
 
     // Criar Usuário
-    const fileName = Date.now().toString() + "-" + file.originalname;
+/*
+    const fileuserName = Date.now().toString() + "-" + file.originalname;
 
-    const fileRef = ref(storage, fileName);
+    const fileRef = ref(storage, fileuserName);
 
     uploadBytes(fileRef, file.buffer);
 
     const imageRef = ref(storage, snapshot.metadata.name);
 
     const urlFinal = getDownloadURL(imageRef);
-
-    const user = new User({ name, email, password: passwordHash, verified, contact, main_device, birth_day, user_picture: fileName, picture_url: urlFinal });
+*/
+const user = new User({ username, email, password: passwordHash, verified, contact, main_device, birth_day, user_picture/*: fileuserName*/, picture_url/*: urlFinal*/ });
 
     try {
-        await user.create(user);
-        res.status(201).json({ msg: `O usuário ${user.name} foi cadastrado com sucesso!` });
+        await user.save(user);
+        res.status(201).json({ msg: `O usuário ${user.username} foi cadastrado com sucesso!` });
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: 'Ocorreu um erro ao cadastrar o usuário.' });

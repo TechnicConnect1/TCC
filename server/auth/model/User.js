@@ -27,8 +27,7 @@ const User = connection.define(
             allowNull: false
         },
         birth_day:{
-            type: sequelize.DATE(),
-            allowNull: false
+            type: sequelize.STRING(255),
         },
         main_device:{
             type: sequelize.STRING(255),
@@ -36,11 +35,9 @@ const User = connection.define(
         },
         user_picture:{
             type: sequelize.STRING(255),
-            allowNull: true
         },
         picture_url:{
             type: sequelize.STRING(255),
-            allowNull: true
         },               
         verified:{
             type: sequelize.BOOLEAN,
