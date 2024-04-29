@@ -20,9 +20,38 @@ exports.emailOTP = async (req, res) => {
             },
             to: email,
             subject: "Verificação de Email",
-            text: "Seu email será verificado futuramente",
-            html: `<h1>Digite o código: ${otp} para concluir a verificação do seu E-mail</h1>
-                    <p><b>Este código expira em 1 hora</b></p>`
+            text: "",
+            html: `<body>
+            <div id="main" style="margin: auto;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            width: 700px;
+            height: 600px;
+            border-radius: 25px;
+            text-align: center;
+            background-color: rgb(112, 110, 110);">
+
+                <div id="title-box" style="height: 100px;
+                width: 700px;
+                border-radius: 25px 25px 0 0;
+                background-color: rgb(70, 151, 218);">
+                    <h1 id="title" style="font-weight: 600;
+                    font-size: 50px;
+                    color:rgb(255, 255, 255);">Confirmação de Email</h1>
+                </div>
+
+                <h2 id="text" style="font-weight: 400;
+                font-size: 40px;
+                color:rgb(255, 255, 255);">Digite o código abaixo para verificarmos a existência do seu Email</h2>
+
+                <h1 id="code" style="font-weight: 700;
+                font-size: 100px;
+                color:rgb(108, 183, 245);">${otp}</h1>
+                
+                <h3 id="alert" style="font-weight: 400;
+                font-size: 20px;
+                color:rgb(255, 255, 255);">Este código expira em 1 hora.</h3>
+            </div>
+        </body>`
         });
 
         const newOTPVerification = await new EmailOTP({
