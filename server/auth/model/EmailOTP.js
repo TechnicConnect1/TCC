@@ -17,5 +17,5 @@ const EmailOTP = mongoose.model('UserOTP', {
     expiresAt: Date
 });
 
-// Exportação do Modelo de Verificação de Usuário
+// Exportação do Modelo
 module.exports = EmailOTP;
