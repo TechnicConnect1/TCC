@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 /* Rota de Registro */
 exports.register = async (req, res) => {
-    const { name, email, password, confirmPassword, verified, contact, birth_day, specialization  } = req.body;
+    const { name, email, password, confirmPassword, verified, contact, birth_day, specialization } = req.body;
     const file = req.file;
 
     // Validação de Dados
@@ -25,6 +25,15 @@ exports.register = async (req, res) => {
     if (!/^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$/.test(password)) {
         return res.status(422).json({ msg: 'A senha deve conter entre 6 e 15 caracteres e incluir pelo menos uma letra maiúscula, um número e um caractere especial.' });
     };
+
+    if (!/^(?:\+55)?(?:[1-9]{2})?(?:9[1-9]\d{3})\d{4}$/.test(contact)) {
+        return res.status(422).json({ msg: 'Insira um número de telefone válido!' });
+    };
+
+    if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/.test(birth_day)) {
+        return res.status(422).json({ msg: 'Data de nascimento inválida!' });
+    };
+    
 
     if (password !== confirmPassword) {
         return res.status(422).json({ msg: 'As senhas não coincidem!' });

@@ -1,14 +1,14 @@
 // Importações
 const express = require('express');
 const router = express.Router();
-const accountController = require('../controller/UserController/UserAccountController');
-const ResetPass = require('../controller/UserController/UserResetPass');
+const technicianAccount = require('../../controller/TechnicianController/TechAccount');
+const ResetPass = require('../../controller/TechnicianController/TechResetPass');
 
 // Rota de Alteração de Dados
-router.patch('/account/update/:id', accountController.updateData);
+router.patch('/account/update/:id', technicianAccount.updateData);
 
 // Rota de Exclusão de Usuário
-router.delete('/account/delete/:id', accountController.deleteUser);
+router.delete('/account/delete/:id', technicianAccount.deleteUser);
 
 // Rota de Verificação para alteração de senha
 router.post('/account/resetPassword/:id', ResetPass.forgotPassword);

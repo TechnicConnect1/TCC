@@ -1,11 +1,11 @@
 //Importações
 const express = require('express');
 const router = express.Router();
-const authController = require('../controller/authController');
-const OTPController = require('../controller/OTPController');
+const technicianAuth = require('../../controller/TechnicianController/TechAuth');
+const OTPController = require('../../controller/TechnicianController/TechOTP');
 
 // Rota de Registro
-router.post('/auth/register', authController.register);
+router.post('/auth/register', technicianAuth.register);
 
 //Rota de Verificação OTP
 router.get('/auth/verify/:id', OTPController.emailOTP);
@@ -14,7 +14,7 @@ router.get('/auth/verify/:id', OTPController.emailOTP);
 router.post('/auth/verify/confirm', OTPController.confirmOTP);
 
 // Rota de Login
-router.post('/auth/login', authController.login);
+router.post('/auth/login', technicianAuth.login);
 
 // Exportação do Router
 module.exports = router;

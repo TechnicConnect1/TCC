@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 
 //Modelo de endereço
 const Address = mongoose.model('Address', {
-    CEP: {
+    cep: {
         type: String,
         required: true
     },
-    logradouro: {
+    street: {
         type: String,
         required: true
     },
