@@ -40,7 +40,7 @@ const Technician = mongoose.model('Technician', {
         type: String,
         required: true
     },
-    Address: {
+    address: {
         type:  mongoose.Schema.Types.ObjectId,
         ref: 'Address',
         required: true,

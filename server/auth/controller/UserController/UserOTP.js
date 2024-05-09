@@ -66,7 +66,7 @@ exports.emailOTP = async (req, res) => {
         res.status(200).json({
             msg: 'E-mail enviado no seu Inbox.',
             data: {
-                user: cod_user,
+                user: Id,
                 email: email
             }
         });
@@ -102,12 +102,13 @@ exports.confirmOTP = async (req, res) => {
         };
 
         const validOTP = await bcrypt.compare(otp, OTPHash);
-
-        await User.updateOne({ cod_user: Id }, { verified: true });
-
-        await EmailOTP.deleteOne({ userId: Id });
-
-        return res.status(200).json({ validOTP });
+        if (validOTP) {
+            await User.updateOne({ _id: Id }, { verified: true });
+            await EmailOTP.deleteOne({ userId: Id });
+            return res.status(200).json({ msg: 'OTP Confirmado com sucesso!' });
+        } else {
+            return res.status(422).json({ msg: 'OTP Inválido!' });
+        };
     } catch (error) {
         console.error(error)
         res.status(500).json({ msg: error });

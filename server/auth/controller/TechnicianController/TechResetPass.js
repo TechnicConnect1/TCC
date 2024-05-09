@@ -131,11 +131,13 @@ exports.changePassword = async (req, res) => {
         const salt = await bcrypt.genSalt(12);
         const newPasswordHash = await bcrypt.hash(newPassword, salt);
 
-        await Technician.updateOne({ cod_technician: Id }, { password: newPasswordHash });
-
-        await EmailOTP.deleteOne({ userId: Id });
-
-        return res.status(200).json({ validOTP });
+        if (validOTP) {
+            await Technician.updateOne({ _id: Id }, { password: newPasswordHash });
+            await EmailOTP.deleteOne({ userId: Id });
+            return res.status(201).json({ msg: 'OTP Confirmado com sucesso' });
+        }else{
+            res.status(500).json({ msg: error });
+        };
     } catch (error) {
         console.error(error)
         res.status(500).json({ msg: error });

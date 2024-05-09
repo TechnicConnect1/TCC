@@ -34,7 +34,6 @@ exports.register = async (req, res) => {
         return res.status(422).json({ msg: 'Data de nascimento inválida!' });
     };
     
-
     if (password !== confirmPassword) {
         return res.status(422).json({ msg: 'As senhas não coincidem!' });
     };
@@ -90,27 +89,27 @@ exports.login = async (req, res) => {
     };
 
     // Checar se Usuário existe
-    const user = await User.findOne({ email: email });
+    const technician = await Technician.findOne({ email: email });
 
-    if (!user) {
+    if (!technician) {
         return res.status(404).json({ msg: 'Usuário não encontrado!' });
     };
 
     // Checar se as senhas combinam
     try {
-        const match = await bcrypt.compare(password, user.password);
+        const match = await bcrypt.compare(password, technician.password);
         if (!match) {
             return res.status(422).json({ msg: 'Senha inválida!' });
         };
 
         // Checar se o usuário é verificado
-        if (!user.verified) {
+        if (!technician.verified) {
             return res.status(404).json({ msg: 'Usuário não verificado!' });
         };
 
         // Gerar token JWT
         const secret = process.env.SECRET;
-        const token = jwt.sign({ id: user._id }, secret);
+        const token = jwt.sign({ id: technician._id }, secret);
 
         res.status(200).json({ msg: 'Autenticação realizada com sucesso!', token });
     } catch (error) {

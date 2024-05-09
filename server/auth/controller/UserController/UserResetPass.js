@@ -100,12 +100,13 @@ exports.changePassword = async (req, res) => {
 
         const salt = await bcrypt.genSalt(12);
         const newPasswordHash = await bcrypt.hash(newPassword, salt);
-
-        await User.updateOne({ cod_user: Id }, { password: newPasswordHash });
-
-        await EmailOTP.deleteOne({ userId: Id });
-
-        return res.status(200).json({ validOTP });
+        if (validOTP) {
+            await User.updateOne({ cod_user: Id }, { password: newPasswordHash });
+            await EmailOTP.deleteOne({ userId: Id });
+            return res.status(200).json({ msg: 'OTP Confirmado com sucesso!' });
+        }else{
+            res.status(500).json({ msg: 'OTP Inválido!' });
+        };
     } catch (error) {
         console.error(error)
         res.status(500).json({ msg: error });
