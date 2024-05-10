@@ -3,16 +3,9 @@ const mongoose = require('mongoose');
 
 // Modelo de Verificação de Usuário
 const EmailOTP = mongoose.model('UserOTP', {
-    userId: {
+    email: {
         type:  mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: false,
-        index: true
-    },
-    techId: {
-        type:  mongoose.Schema.Types.ObjectId,
-        ref: 'Technician',
-        required: false,
+        required: true,
         index: true
     },
     uniqueString: {

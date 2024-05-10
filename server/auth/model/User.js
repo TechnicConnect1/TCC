@@ -30,7 +30,7 @@ const User = mongoose.model('User', {
     },
     verified: {
         type: Boolean,
-        defaultd: false
+        default: false
     },
     user_picture: {
         type: String,
@@ -41,9 +41,30 @@ const User = mongoose.model('User', {
         required: true
     },
     address: {
-        type:  mongoose.Schema.Types.ObjectId,
-        ref: 'Address',
-        required: true,
+        cep: {
+            type: String,
+            required: true
+        },
+        street: {
+            type: String,
+            required: true
+        },
+        neighborhood: {
+            type: String,
+            required: true
+        },
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        number: {
+            type: String,
+            required: true
+        }
     }
 });
 

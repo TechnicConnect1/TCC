@@ -6,15 +6,15 @@ const jwt = require('jsonwebtoken');
 
 /* Rota de Registro */
 exports.register = async (req, res) => {
-    const { username, email, password, confirmPassword, verified, contact, birth_day, main_device, user_picture, picture_url } = req.body;
-    const file = req.file;
+    const { name, email, password, confirmPassword, verified, contact, birth_day, main_device, user_picture, picture_url, address } = req.body;
+    /*const file = req.file;*/
 
     // Validação de Dados
-    if (!username || !email || !password) {
+    if (!name || !email || !password || !cep || !number) {
         return res.status(422).json({ msg: 'Por favor, preencha todos os campos obrigatórios!' });
     };
 
-    if (!/^[a-zA-Z ]*$/.test(username)) {
+    if (!/^[a-zA-Z ]*$/.test(name)) {
         return res.status(422).json({ msg: 'Por favor, digite um nome válido!' });
     };
 
@@ -32,6 +32,14 @@ exports.register = async (req, res) => {
 
     if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/.test(birth_day)) {
         return res.status(422).json({ msg: 'Data de nascimento inválida!' });
+    };
+
+    if (!/^\d{5}-\d{3}$|^\d{8}$/.test(cep)) {
+        return res.status(422).json({ msg: 'Por favor, digite um CEP válido!' });
+    };
+
+    if (!/^\d{1,5}$/.test(number)) {
+        return res.status(422).json({ msg: 'Por favor, digite um número válido!' });
     };
 
     if (password !== confirmPassword) {
@@ -55,9 +63,9 @@ exports.register = async (req, res) => {
 
     // Criar Usuário
 /*
-    const fileuserName = Date.now().toString() + "-" + file.originalname;
+    const fileName = Date.now().toString() + "-" + file.originalname;
 
-    const fileRef = ref(storage, fileuserName);
+    const fileRef = ref(storage, fileName);
 
     uploadBytes(fileRef, file.buffer);
 
@@ -65,11 +73,11 @@ exports.register = async (req, res) => {
 
     const urlFinal = getDownloadURL(imageRef);
 */
-const user = new User({ username, email, password: passwordHash, verified, contact, main_device, birth_day, user_picture/*: fileuserName*/, picture_url/*: urlFinal*/ });
+const user = new User({ name, email, password: passwordHash, verified, contact, main_device, birth_day, user_picture/*: fileName*/, picture_url/*: urlFinal*/, address });
 
     try {
         await user.save(user);
-        res.status(201).json({ msg: `O usuário ${user.username} foi cadastrado com sucesso!` });
+        res.status(201).json({ msg: `O usuário ${user.name} foi cadastrado com sucesso!` });
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: 'Ocorreu um erro ao cadastrar o usuário.' });

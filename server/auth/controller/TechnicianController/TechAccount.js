@@ -4,8 +4,8 @@ const Technician = require('../../model/Technician');
 // Modificar Dados do Usuário
 exports.updateData = async (req, res) => {
     const id = req.params.id;
-    const { name, email, contact, birth_day, specialization } = req.body;
-    const technician = { name, email, contact, birth_day, specialization };
+    const { name, email, contact, birth_day, specialization, address } = req.body;
+    const technician = { name, email, contact, birth_day, specialization, address };
 
     try {
         const updatedTechnician = await Technician.updateOne({ _id: id }, technician);

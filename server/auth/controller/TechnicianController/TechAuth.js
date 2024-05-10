@@ -10,7 +10,7 @@ exports.register = async (req, res) => {
     const file = req.file;
 
     // Validação de Dados
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !cep || !number) {
         return res.status(422).json({ msg: 'Por favor, preencha todos os campos obrigatórios!' });
     };
 
@@ -32,6 +32,14 @@ exports.register = async (req, res) => {
 
     if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/.test(birth_day)) {
         return res.status(422).json({ msg: 'Data de nascimento inválida!' });
+    };
+
+    if (!/^\d{5}-\d{3}$|^\d{8}$/.test(cep)) {
+        return res.status(422).json({ msg: 'Por favor, digite um CEP válido!' });
+    };
+
+    if (!/^\d{1,5}$/.test(number)) {
+        return res.status(422).json({ msg: 'Por favor, digite um número válido!' });
     };
     
     if (password !== confirmPassword) {

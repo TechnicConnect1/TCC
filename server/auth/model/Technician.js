@@ -41,9 +41,30 @@ const Technician = mongoose.model('Technician', {
         required: true
     },
     address: {
-        type:  mongoose.Schema.Types.ObjectId,
-        ref: 'Address',
-        required: true,
+        cep: {
+            type: String,
+            required: true
+        },
+        street: {
+            type: String,
+            required: true
+        },
+        neighborhood: {
+            type: String,
+            required: true
+        },
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        number: {
+            type: String,
+            required: true
+        }
     }
 });
 

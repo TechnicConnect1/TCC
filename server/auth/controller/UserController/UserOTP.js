@@ -6,13 +6,12 @@ const User = require('../../model/User');
 
 /* Rota para envio de Email */
 exports.emailOTP = async (req, res) => {
+    const { email } = req.body
     try {
         const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
         const salt = await bcrypt.genSalt(12);
         const OTPHash = await bcrypt.hash(otp, salt);
-        const Id = req.params.id;
-        const user = await User.findById(cod_user);
-        const email = user.email;
+
         transporter.sendMail({
             from: {
                 name: 'Technic Connect Team',
@@ -54,8 +53,8 @@ exports.emailOTP = async (req, res) => {
         </body>`
         });
 
-        const newOTPVerification = await new EmailOTP({
-            userId: Id,
+        const newOTPVerification = new EmailOTP({
+            email,
             uniqueString: OTPHash,
             createdAt: Date.now(),
             expiresAt: Date.now() + 3600000,
@@ -66,8 +65,7 @@ exports.emailOTP = async (req, res) => {
         res.status(200).json({
             msg: 'E-mail enviado no seu Inbox.',
             data: {
-                user: Id,
-                email: email
+                email
             }
         });
     } catch (error) {
@@ -78,15 +76,14 @@ exports.emailOTP = async (req, res) => {
 
 /* Rota para confirmação de OTP */
 exports.confirmOTP = async (req, res) => {
-    const { otp } = req.body;
-    const Id = req.params.id;
+    const { otp, email } = req.body;
     try {
-        if (!Id || !otp) {
+        if (!email || !otp) {
             res.status(422).json({ msg: 'E-mail ou código de verificação inválidos.' })
             return;
         };
 
-        const otpMatch = await EmailOTP.findOne({ userId: Id });
+        const otpMatch = await EmailOTP.findOne({ email });
 
         if (otpMatch === null) {
             res.status(422).json({ msg: 'Nenhum código de verificação encontrado.' });
@@ -96,15 +93,15 @@ exports.confirmOTP = async (req, res) => {
         const { expiresAt, uniqueString: OTPHash } = otpMatch;
 
         if (expiresAt < Date.now()) {
-            await EmailOTP.deleteOne({ userId: Id });
+            await EmailOTP.deleteOne({ email });
             res.status(500).json({ msg: 'Seu código de verificação expirou, solicite outro código.' })
             return;
         };
 
         const validOTP = await bcrypt.compare(otp, OTPHash);
         if (validOTP) {
-            await User.updateOne({ _id: Id }, { verified: true });
-            await EmailOTP.deleteOne({ userId: Id });
+            await User.updateOne({ email }, { verified: true });
+            await EmailOTP.deleteOne({ email });
             return res.status(200).json({ msg: 'OTP Confirmado com sucesso!' });
         } else {
             return res.status(422).json({ msg: 'OTP Inválido!' });
