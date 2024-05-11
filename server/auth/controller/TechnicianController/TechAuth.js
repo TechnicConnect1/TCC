@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 /* Rota de Registro */
 exports.register = async (req, res) => {
-    const { name, email, password, confirmPassword, verified, contact, birth_day, specialization } = req.body;
+    const { name, email, password, confirmPassword, verified, contact, birth_day, specialization, address } = req.body;
     const file = req.file;
 
     // Validação de Dados
@@ -72,7 +72,7 @@ exports.register = async (req, res) => {
 
     const urlFinal = getDownloadURL(imageRef);
 
-    const technician = new Technician({ name, email, password: passwordHash, verified, contact, specialization, birth_day, technician_picture: fileName, picture_url: urlFinal });
+    const technician = new Technician({ name, email, password: passwordHash, verified, contact, specialization, birth_day, technician_picture: fileName, picture_url: urlFinal, address });
 
     try {
         await technician.save();

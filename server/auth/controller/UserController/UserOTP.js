@@ -11,6 +11,11 @@ exports.emailOTP = async (req, res) => {
         const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
         const salt = await bcrypt.genSalt(12);
         const OTPHash = await bcrypt.hash(otp, salt);
+        const userExists = await User.findOne({ email: email });
+
+        if (!userExists) {
+            return res.status(422).json({ msg: 'Não existe um usuário com este email' });
+        };
 
         transporter.sendMail({
             from: {
@@ -82,7 +87,7 @@ exports.confirmOTP = async (req, res) => {
             res.status(422).json({ msg: 'E-mail ou código de verificação inválidos.' })
             return;
         };
-
+        
         const otpMatch = await EmailOTP.findOne({ email });
 
         if (otpMatch === null) {
@@ -90,6 +95,12 @@ exports.confirmOTP = async (req, res) => {
             return;
         };
 
+        const userExists = await User.findOne({ email: email });
+
+        if (!userExists) {
+            return res.status(422).json({ msg: 'Não existe um usuário com este email' });
+        };
+        
         const { expiresAt, uniqueString: OTPHash } = otpMatch;
 
         if (expiresAt < Date.now()) {
