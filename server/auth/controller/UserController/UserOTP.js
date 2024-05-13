@@ -43,7 +43,7 @@ exports.emailOTP = async (req, res) => {
                     color:rgb(255, 255, 255);">Confirmação de Email</h1>
                 </div>
 
-                <h2 id="text" style="font-weight: 400;
+                <h2 id="text" style="font-weight: 500;
                 font-size: 40px;
                 color:rgb(255, 255, 255);">Digite o código abaixo para verificarmos a existência do seu Email</h2>
 

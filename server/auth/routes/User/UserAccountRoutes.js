@@ -11,10 +11,10 @@ router.patch('/account/update/:id', accountController.updateData);
 router.delete('/account/delete/:id', accountController.deleteUser);
 
 // Rota de Verificação para alteração de senha
-router.post('/account/resetPassword/:id', ResetPass.forgotPassword);
+router.post('/account/resetPassword/', ResetPass.forgotPassword);
 
 // Rota de Ateração de Senha
-router.post('/account/changePassword/:id', ResetPass.changePassword);
+router.post('/account/changePassword/', ResetPass.changePassword);
 
 // Exportação do Router
 module.exports = router;

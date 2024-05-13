@@ -12,7 +12,7 @@ const User = mongoose.model('User', {
         required: true
     },
     birth_day: {
-        type: Date,
+        type: String,
         required: true
     },
     device: {
@@ -47,19 +47,15 @@ const User = mongoose.model('User', {
         },
         street: {
             type: String,
-            required: true
         },
         neighborhood: {
             type: String,
-            required: true
         },
         city: {
             type: String,
-            required: true
         },
         state: {
             type: String,
-            required: true
         },
         number: {
             type: String,

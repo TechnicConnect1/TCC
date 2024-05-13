@@ -3,14 +3,30 @@ require('dotenv').config();
 const User = require('../../model/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
+const { initializeApp } = require('firebase/app');
+const { getStorage, ref, getDownloadURL, uploadBytes } = require('firebase/storage');
+
+const firebaseConfig = {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MEASUREMENT_ID
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const storage = getStorage(firebaseApp);
 
 /* Rota de Registro */
 exports.register = async (req, res) => {
-    const { name, email, password, confirmPassword, verified, contact, birth_day, main_device, user_picture, picture_url, address } = req.body;
-    /*const file = req.file;*/
+    const { name, email, password, confirmPassword, verified, contact, birth_day, device, user_picture, user_picture_url, address } = req.body;
+    const file = req.file;
 
     // Validação de Dados
-    if (!name || !email || !password || !cep || !number) {
+    if (!name || !email || !password || !address.cep || !address.number) {
         return res.status(422).json({ msg: 'Por favor, preencha todos os campos obrigatórios!' });
     };
 
@@ -21,7 +37,7 @@ exports.register = async (req, res) => {
     if (!/\S+@\S+\.\S+/.test(email)) {
         return res.status(422).json({ msg: 'Por favor, digite um email válido!' });
     };
-    
+
     if (!/^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$/.test(password)) {
         return res.status(422).json({ msg: 'A senha deve conter entre 6 e 15 caracteres e incluir pelo menos uma letra maiúscula, um número e um caractere especial.' });
     };
@@ -30,25 +46,21 @@ exports.register = async (req, res) => {
         return res.status(422).json({ msg: 'Insira um número de telefone válido!' });
     };
 
-    if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/.test(birth_day)) {
+    if (!/^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/.test(birth_day)) {
         return res.status(422).json({ msg: 'Data de nascimento inválida!' });
     };
 
-    if (!/^\d{5}-\d{3}$|^\d{8}$/.test(cep)) {
+    if (!/^\d{5}-\d{3}$|^\d{8}$/.test(address.cep)) {
         return res.status(422).json({ msg: 'Por favor, digite um CEP válido!' });
     };
 
-    if (!/^\d{1,5}$/.test(number)) {
+    if (!/^\d{1,5}$/.test(address.number)) {
         return res.status(422).json({ msg: 'Por favor, digite um número válido!' });
     };
 
     if (password !== confirmPassword) {
         return res.status(422).json({ msg: 'As senhas não coincidem!' });
     };
-
-    /*if (!file) {
-        return res.status(422).json({ msg: 'Não há imagem!' });
-    };*/
 
     // Checar se o Usuário existe
     const userExists = await User.findOne({ email: email });
@@ -57,29 +69,40 @@ exports.register = async (req, res) => {
         return res.status(422).json({ msg: 'Um usuário com este email já existe!' });
     };
 
-    // Criar a Hash da Senha
-    const salt = await bcrypt.genSalt(12);
-    const passwordHash = await bcrypt.hash(password, salt);
-
-    // Criar Usuário
-/*
-    const fileName = Date.now().toString() + "-" + file.originalname;
-
-    const fileRef = ref(storage, fileName);
-
-    uploadBytes(fileRef, file.buffer);
-
-    const imageRef = ref(storage, snapshot.metadata.name);
-
-    const urlFinal = getDownloadURL(imageRef);
-*/
-const user = new User({ name, email, password: passwordHash, verified, contact, main_device, birth_day, user_picture/*: fileName*/, picture_url/*: urlFinal*/, address });
+    if (!file) {
+        return res.status(422).json({ msg: 'Não há imagem!' });
+    };
 
     try {
+        const response = await axios.get(`https://brasilapi.com.br/api/cep/v1/${address.cep}`);
+        const { data } = response;
+
+        if (!data) {
+            return res.status(404).json({ error: 'CEP não encontrado' });
+        };
+
+        address.street = data.street;
+        address.neighborhood = data.neighborhood;
+        address.city = data.city;
+        address.state = data.state;
+
+        // Criar a Hash da Senha
+        const salt = await bcrypt.genSalt(12);
+        const passwordHash = await bcrypt.hash(password, salt);
+
+        //Firebase file
+        const fileName = Date.now().toString() + "-" + file.originalname;
+        const fileRef = ref(storage, fileName);
+        await uploadBytes(fileRef, file.buffer);
+        const urlFinal = await getDownloadURL(fileRef);
+
+        // Criar Usuário
+        const user = new User({ name, email, password: passwordHash, verified, contact, device, birth_day, user_picture: fileName, user_picture_url: urlFinal, address });
         await user.save(user);
+
         res.status(201).json({ msg: `O usuário ${user.name} foi cadastrado com sucesso!` });
     } catch (error) {
-        console.error(error);
+        console.error('Erro ao cadastrar usuário:', error);
         res.status(500).json({ msg: 'Ocorreu um erro ao cadastrar o usuário.' });
     };
 };
