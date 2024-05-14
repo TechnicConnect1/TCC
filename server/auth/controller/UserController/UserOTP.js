@@ -6,12 +6,16 @@ const User = require('../../model/User');
 
 /* Rota para envio de Email */
 exports.emailOTP = async (req, res) => {
-    const { email } = req.body
+    const { email } = req.body;
     try {
         const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
         const salt = await bcrypt.genSalt(12);
         const OTPHash = await bcrypt.hash(otp, salt);
         const userExists = await User.findOne({ email: email });
+
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            return res.status(422).json({ msg: 'Por favor, digite um email válido!' });
+        };
 
         if (!userExists) {
             return res.status(422).json({ msg: 'Não existe um usuário com este email' });

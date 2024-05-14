@@ -32,8 +32,8 @@ exports.publicRoute = (req, res) => {
 // Rota Privada
 exports.privateRoute = async (req, res) => {
     try {
-        const Id = req.params.id; 
-        const technician = await Technician.findById(Id, '-password');
+        const id = req.params.id; 
+        const technician = await Technician.findById(id, '-password');
 
         if (!technician) {
             return res.status(404).json({ msg: 'Usuário não encontrado.' });
