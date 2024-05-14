@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Modelo de Usuário
-const User = mongoose.model('User', {
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -63,6 +63,8 @@ const User = mongoose.model('User', {
         }
     }
 });
+
+const User = mongoose.model('User', userSchema);
 
 // Exportação do Modelo
 module.exports = User;

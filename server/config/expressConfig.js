@@ -12,8 +12,9 @@ app.use(express.json());
 app.use(cors());
 
 // Controllers
-app.use(userRoutes);
-app.use(authRoutes);
-app.use(accountRoutes);
+app.use('/user/', userRoutes);
+app.use('/auth/', authRoutes);
+app.use('/account/', accountRoutes);
+app.user('/chat/, ')
 
 module.exports = app;

@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Modelo de Verificação de Usuário
-const EmailOTP = mongoose.model('UserOTP', {
+const emailOTPSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -18,6 +18,8 @@ const EmailOTP = mongoose.model('UserOTP', {
         expires: 3600
     }
 });
+
+const EmailOTP = mongoose.model('UserOTP', emailOTPSchema);
 
 // Exportação do Modelo
 module.exports = EmailOTP;

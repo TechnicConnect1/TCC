@@ -143,10 +143,9 @@ exports.login = async (req, res) => {
         };
 
         // Gerar token JWT
-        const secret = process.env.SECRET;
-        const token = jwt.sign({ id: technician._id }, secret);
+        generateToken(technician._id, res);
 
-        res.status(200).json({ msg: 'Autenticação realizada com sucesso!', token });
+        res.status(200).json({ msg: 'Autenticação realizada com sucesso!'});
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: 'Ocorreu um erro ao tentar fazer login.' });

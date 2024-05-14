@@ -2,8 +2,8 @@
 require('dotenv').config();
 const User = require('../../model/User');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const axios = require('axios');
+const generateToken = require('../../utils/generateToken');
 const { initializeApp } = require('firebase/app');
 const { getStorage, ref, getDownloadURL, uploadBytes } = require('firebase/storage');
 
@@ -140,8 +140,7 @@ exports.login = async (req, res) => {
         };
 
         // Gerar token JWT
-        const secret = process.env.SECRET;
-        const token = jwt.sign({ id: user._id }, secret);
+        generateToken(user._id, res);
 
         res.status(200).json({ msg: 'Autenticação realizada com sucesso!', token });
     } catch (error) {

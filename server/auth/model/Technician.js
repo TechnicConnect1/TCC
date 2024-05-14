@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Modelo de Técnico
-const Technician = mongoose.model('Technician', {
+const technicianSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -67,6 +67,8 @@ const Technician = mongoose.model('Technician', {
         }
     }
 });
+
+const Technician = mongoose.model('Technician', technicianSchema);
 
 // Exportação do Modelo
 module.exports = Technician;

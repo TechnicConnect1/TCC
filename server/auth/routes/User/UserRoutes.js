@@ -7,7 +7,7 @@ const UserController = require('../../controller/UserController/UserController')
 router.get('/', UserController.publicRoute);
 
 // Rota Privada
-router.get('/user/:id', UserController.validPrivateRoute);
+router.get('/:id', UserController.validPrivateRoute);
 
 // Exportação do Router
 module.exports = router;
