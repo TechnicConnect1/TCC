@@ -15,7 +15,7 @@ function checkToken(req, res, next) {
     try {
         const secret = process.env.SECRET;
         const decoded = jwt.verify(token, secret);
-        req.technician = decoded.technician; 
+        req.technician = decoded.technician;
         next();
     } catch (error) {
         res.status(401).json({ msg: 'Token inválido.' });
@@ -32,7 +32,7 @@ exports.publicRoute = (req, res) => {
 // Rota Privada
 exports.privateRoute = async (req, res) => {
     try {
-        const id = req.params.id; 
+        const id = req.params.id;
         const technician = await Technician.findById(id, '-password');
 
         if (!technician) {
