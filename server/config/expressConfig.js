@@ -7,7 +7,7 @@ const techRoutes = require('../auth/routes/Technician/TechnicianRoutes');
 const techAuthRoutes = require('../auth/routes/Technician/TechnicianAuthRoutes');
 const techAccountRoutes = require('../auth/routes/Technician/TechnicianAuthRoutes');
 const messageRoutes = require('../chat/routes/MessageRoutes');
-const app = express();
+import { app } from '../chat/socket/socket.js';
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
