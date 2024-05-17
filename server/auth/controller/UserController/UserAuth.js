@@ -3,7 +3,7 @@ require('dotenv').config();
 const User = require('../../model/User');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
-const generateToken = require('../../../utils/generateToken');
+const generateToken = require('../../../utils/generateToken.js');
 const { initializeApp } = require('firebase/app');
 const { getStorage, ref, getDownloadURL, uploadBytes } = require('firebase/storage');
 

@@ -2,12 +2,12 @@
 const express = require('express');
 const router = express.Router();
 const MessageController = require('../controller/MessageController/MessageController');
-const ProtectRoute = require('../middleware/protectRoute');
+const ProtectRoute = require('../../middleware/protectRoute.js');
 
 // Rotas
-router.post('/send/:id', ProtectRoute.protectRoute, MessageController.sendMessage);
-router.get('/:id', ProtectRoute.protectRoute, MessageController.getMessages);
-router.get('/getUsers', ProtectRoute.protectRoute, MessageController);
+router.post('/send/:id', ProtectRoute, MessageController.sendMessage);
+router.get('/:id', ProtectRoute, MessageController.getMessages);
+// router.get('/getUsers', ProtectRoute, MessageController);
 
 // Exportação do Router
 module.exports = router;

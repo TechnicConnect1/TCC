@@ -1,10 +1,9 @@
 // Importações
-// Importações
 require('dotenv').config();
 const Technician = require('../../model/Technician');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const axios = require('axios');
+const generateToken = require('../../../utils/generateToken.js');
 const { initializeApp } = require('firebase/app');
 const { getStorage, ref, getDownloadURL, uploadBytes } = require('firebase/storage');
 
@@ -21,14 +20,13 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const storage = getStorage(firebaseApp);
 
-
 /* Rota de Registro */
 exports.register = async (req, res) => {
     const { name, email, password, confirmPassword, verified, contact, birth_day, specialization, address } = req.body;
     const file = req.file;
 
     // Validação de Dados
-    if (!name || !email || !password || !cep || !number) {
+    if (!name || !email || !password || !address.cep || !address.number) {
         return res.status(422).json({ msg: 'Por favor, preencha todos os campos obrigatórios!' });
     };
 
@@ -48,7 +46,7 @@ exports.register = async (req, res) => {
         return res.status(422).json({ msg: 'Insira um número de telefone válido!' });
     };
 
-    if (!/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/.test(birth_day)) {
+    if (!/^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/.test(birth_day)) {
         return res.status(422).json({ msg: 'Data de nascimento inválida!' });
     };
 
@@ -67,7 +65,7 @@ exports.register = async (req, res) => {
     const TechnicianExists = await Technician.findOne({ email: email });
 
     if (TechnicianExists) {
-        return res.status(422).json({ msg: 'Um usuário com este email já existe!' });
+        return res.status(422).json({ msg: 'Um Técnico com este email já existe!' });
     };
 
     if (!file) {
@@ -97,20 +95,20 @@ exports.register = async (req, res) => {
         await uploadBytes(fileRef, file.buffer);
         const urlFinal = await getDownloadURL(fileRef);
 
-        // Criar Usuário
-        const technician = new Technician({ name, email, password: passwordHash, verified, contact, specialization, birth_day, technician_picture: fileName, picture_url: urlFinal, address });
+        // Criar Técnico
+        const technician = new Technician({ name, email, password: passwordHash, verified, contact, specialization, birth_day, user_picture: fileName, user_picture_url: urlFinal, address });
         await technician.save(technician);
 
-        res.status(201).json({ msg: `O usuário ${technician.name} foi cadastrado com sucesso!` });
+        res.status(201).json({ msg: `O Técnico ${technician.name} foi cadastrado com sucesso!` });
     } catch (error) {
-        console.error('Erro ao cadastrar usuário:', error);
-        res.status(500).json({ msg: 'Ocorreu um erro ao cadastrar o usuário.' });
+        console.error('Erro ao cadastrar Técnico:', error);
+        res.status(500).json({ msg: 'Ocorreu um erro ao cadastrar o Técnico.' });
     }
 };
 
 
 
-/* Logar Usuário */
+/* Logar Técnico */
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -123,11 +121,11 @@ exports.login = async (req, res) => {
         return res.status(422).json({ msg: 'A senha é obrigatória!' });
     };
 
-    // Checar se Usuário existe
+    // Checar se Técnico existe
     const technician = await Technician.findOne({ email: email });
 
     if (!technician) {
-        return res.status(404).json({ msg: 'Usuário não encontrado!' });
+        return res.status(404).json({ msg: 'Técnico não encontrado!' });
     };
 
     // Checar se as senhas combinam
@@ -137,9 +135,9 @@ exports.login = async (req, res) => {
             return res.status(422).json({ msg: 'Senha inválida!' });
         };
 
-        // Checar se o usuário é verificado
+        // Checar se o Técnico é verificado
         if (!technician.verified) {
-            return res.status(404).json({ msg: 'Usuário não verificado!' });
+            return res.status(404).json({ msg: 'Técnico não verificado!' });
         };
 
         // Gerar token JWT

@@ -12,7 +12,7 @@ const technicianSchema = new mongoose.Schema({
         required: true
     },
     birth_day: {
-        type: Date,
+        type: String,
         required: true
     },
     specialization: {

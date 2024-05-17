@@ -1,26 +1,6 @@
 // Importações
 require('dotenv').config();
 const User = require('../../model/User');
-const jwt = require('jsonwebtoken');
-
-// Método para validação de token
-function checkToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(" ")[1];
-
-    if (!token) {
-        return res.status(401).json({ msg: 'Token de acesso não fornecido.' });
-    };
-
-    try {
-        const secret = process.env.SECRET;
-        const decoded = jwt.verify(token, secret);
-        req.user = decoded.user;
-        next();
-    } catch (error) {
-        res.status(401).json({ msg: 'Token inválido.' });
-    };
-}
 
 // Rota Inicial
 exports.publicRoute = (req, res) => {
@@ -44,6 +24,3 @@ exports.privateRoute = async (req, res) => {
         console.log(error);
     };
 };
-
-// Middleware para validar o token antes de acessar a rota privada
-exports.validPrivateRoute = [checkToken, exports.privateRoute];

@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const User = require('../../auth/model/User');
+const User = require('../auth/model/User');
 
-exports.protectRoute = async (req, res, next) => {
+const protectRoute = async (req, res, next) => {
     try {
         const token = req.cookies.jwt;
 
@@ -29,3 +29,5 @@ exports.protectRoute = async (req, res, next) => {
         res.status(500).json({ msg: error.message });
     };
 };
+
+module.exports = protectRoute;

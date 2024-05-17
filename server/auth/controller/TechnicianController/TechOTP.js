@@ -1,5 +1,5 @@
 //Importações
-const transporter = require('../../config/OTPConfig');
+const transporter = require('../../../config/OTPConfig');
 const EmailOTP = require('../../model/EmailOTP');
 const bcrypt = require('bcrypt');
 const Technician = require('../../model/Technician');
@@ -100,7 +100,7 @@ exports.confirmOTP = async (req, res) => {
             return;
         };
 
-        const technicianExists = await User.findOne({ email: email });
+        const technicianExists = await Technician.findOne({ email: email });
 
         if (!technicianExists) {
             return res.status(422).json({ msg: 'Não existe um técnico com este email' });
