@@ -15,10 +15,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    device: {
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true,
@@ -41,6 +37,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     address: {
+        required: true,
         cep: {
             type: String,
             required: true

@@ -85,7 +85,8 @@ exports.emailOTP = async (req, res) => {
 
 /* Rota para confirmação de OTP */
 exports.confirmOTP = async (req, res) => {
-    const { otp, email } = req.body;
+    const { otp } = req.body;
+    const email = req.headers.email;
     try {
         if (!email || !otp) {
             res.status(422).json({ msg: 'E-mail ou código de verificação inválidos.' })

@@ -6,6 +6,7 @@ const axios = require('axios');
 const generateToken = require('../../../utils/generateToken.js');
 const { initializeApp } = require('firebase/app');
 const { getStorage, ref, getDownloadURL, uploadBytes } = require('firebase/storage');
+const moment = require = ('moment');
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -22,7 +23,7 @@ const storage = getStorage(firebaseApp);
 
 /* Rota de Registro */
 exports.register = async (req, res) => {
-    const { name, email, password, confirmPassword, verified, contact, birth_day, device, user_picture, user_picture_url, address } = req.body;
+    const { name, email, password, confirmPassword, verified, contact, birth_day, user_picture, user_picture_url, address } = req.body;
     const file = req.file;
 
     // Validação de Dados
@@ -46,7 +47,9 @@ exports.register = async (req, res) => {
         return res.status(422).json({ msg: 'Insira um número de telefone válido!' });
     };
 
-    if (!/^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(19|20)\d{2}$/.test(birth_day)) {
+    const parsedBirthDay = moment(birth_day, 'DD-MM-YYYY', true);
+    
+    if (!parsedBirthDay.isValid()) {
         return res.status(422).json({ msg: 'Data de nascimento inválida!' });
     };
 
