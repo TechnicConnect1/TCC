@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 // Modelo de Técnico
 const technicianDataSchema = new mongoose.Schema({
     CNPJ: {
+        ref: 'User',
         type: String,
-        required: true,
         unique: true
     },
     specialization: {
@@ -14,11 +14,12 @@ const technicianDataSchema = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     }
 });
 
-const Technician = mongoose.model('TechnicianData', technicianDataSchema);
+const TechnicianData = mongoose.model('TechnicianData', technicianDataSchema);
 
 // Exportação do Modelo
-module.exports = Technician;
+module.exports = TechnicianData;

@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    technician: {
+        type: Boolean,
+        default: false
+    },
     user_picture: {
         type: String,
         required: true

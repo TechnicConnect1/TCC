@@ -74,7 +74,7 @@ exports.emailOTP = async (req, res) => {
         res.status(200).json({
             msg: 'E-mail enviado no seu Inbox.',
             data: {
-                email
+                email: email
             }
         });
     } catch (error) {

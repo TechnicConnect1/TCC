@@ -2,7 +2,7 @@
 require('dotenv').config();
 const User = require('../../model/User');
 
-// Rota Inicial
+// Rota Pública
 exports.publicRoute = (req, res) => {
     res.status(200).json({
         msg: 'API Inicializada com sucesso!'
@@ -12,8 +12,8 @@ exports.publicRoute = (req, res) => {
 // Rota Privada
 exports.privateRoute = async (req, res) => {
     try {
-        const userId = req.params.id; 
-        const user = await User.findById(userId, '-password');
+        const id = req.headers.id; 
+        const user = await User.findById(id, '-password');
 
         if (!user) {
             return res.status(404).json({ msg: 'Usuário não encontrado.' });

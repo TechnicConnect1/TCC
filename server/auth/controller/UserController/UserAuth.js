@@ -1,6 +1,7 @@
 // Importações
 require('dotenv').config();
 const User = require('../../model/User');
+const TechnicianData = require('../../model/TechnicianData');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 const generateToken = require('../../../utils/generateToken.js');
@@ -23,7 +24,7 @@ const storage = getStorage(firebaseApp);
 
 /* Rota de Registro */
 exports.register = async (req, res) => {
-    const { name, email, password, confirmPassword, verified, contact, birth_day, user_picture, user_picture_url, address } = req.body;
+    const { name, email, password, confirmPassword, verified, contact, birth_day, address, technician } = req.body;
     const file = req.file;
 
     // Validação de Dados
@@ -48,7 +49,7 @@ exports.register = async (req, res) => {
     };
 
     const parsedBirthDay = moment(birth_day, 'DD-MM-YYYY', true);
-    
+
     if (!parsedBirthDay.isValid()) {
         return res.status(422).json({ msg: 'Data de nascimento inválida!' });
     };
@@ -100,7 +101,26 @@ exports.register = async (req, res) => {
         const urlFinal = await getDownloadURL(fileRef);
 
         // Criar Usuário
-        const user = new User({ name, email, password: passwordHash, verified, contact, device, birth_day, user_picture: fileName, user_picture_url: urlFinal, address });
+        const user = new User({ name, email, password: passwordHash, verified, contact, device, birth_day, user_picture: fileName, user_picture_url: urlFinal, address, technician });
+
+        // Adicionar dados de Técnico
+        if (technician == true) {
+            await user.updateOne({ technician: true });
+            console.log('É Técnicio');
+            try {
+                const { CNPJ, specialization, rating } = req.body;
+
+                // Validações
+
+                const technicianData = new TechnicianData({ CNPJ, specialization, rating });
+                await technicianData.save(technicianData);
+
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ msg: 'fodeo mano' });
+            };
+        };
+
         await user.save(user);
 
         res.status(201).json({ msg: `O usuário ${user.name} foi cadastrado com sucesso!` });

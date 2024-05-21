@@ -4,9 +4,9 @@ const User = require('../../model/User');
 
 // Modificar Dados do Usuário
 exports.updateData = async (req, res) => {
-    const id = req.params.id;
-    const { name, email, contact, birth_day, main_device } = req.body;
-    const user = { name, email, contact, birth_day, main_device };
+    const id = req.headers.id;
+    const { name, email, contact, birth_day, address } = req.body;
+    const user = { name, email, contact, birth_day, address };
 
     try {
         const updatedUser = await User.updateOne({ _id: id }, user);
@@ -23,7 +23,7 @@ exports.updateData = async (req, res) => {
 
 // Deletar usuário
 exports.deleteUser = async (req, res) => {
-    const id = req.params.id;
+    const id = req.headers.id;
     const user = await User.findOne({ _id: id });
 
     if (!user) {

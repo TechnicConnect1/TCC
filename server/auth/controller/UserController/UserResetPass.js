@@ -67,7 +67,8 @@ exports.forgotPassword = async (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-    const { otp, newPassword, email } = req.body;
+    const { otp, newPassword } = req.body;
+    const email = req.headers.email;
     try {
         if (!otp || !newPassword) {
             res.status(422).json({ msg: 'Código de verificação ou Senha inválidos.' });
