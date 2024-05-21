@@ -24,6 +24,6 @@ app.use('/account/', userAccountRoutes);
 app.use('/chat/', messageRoutes);
 
 // Posts Routes
-app.use('/post/', postsRoutes);
+app.use('/posts/', postsRoutes);
 
 module.exports = app;

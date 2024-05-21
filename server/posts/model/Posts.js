@@ -17,10 +17,13 @@ const PostsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    title:{
+        type: String,
+        required: true
+    },
     likes: {
-        type: Number,
-        required: true,
-        default: 0
+        type: Array,
+        default: []
     },
     comments: {
         type: Number,
