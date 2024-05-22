@@ -1,54 +1,71 @@
-const sequelize = require('sequelize');
-const connection = require("../../DB/database");
+// Importação do Mongoose
+const mongoose = require('mongoose');
 
-const User = connection.define(
-    "clientes",
-    {
-        cod_user:{
-            type: sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-            unsigned: true
+// Modelo de Usuário
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    contact: {
+        type: String,
+        required: true
+    },
+    birth_day: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    technician: {
+        type: Boolean,
+        default: false
+    },
+    user_picture: {
+        type: String,
+        required: true
+    },
+    user_picture_url: {
+        type: String,
+        required: true
+    },
+    address: {
+        required: true,
+        cep: {
+            type: String,
+            required: true
         },
-        username:{
-            type: sequelize.STRING(255),
-            allowNull: false
+        street: {
+            type: String,
         },
-        email:{
-            type: sequelize.STRING(255),
-            allowNull: false
+        neighborhood: {
+            type: String,
         },
-        password:{
-            type: sequelize.STRING(255),
-            allowNull: false
-        },        
-        contact:{
-            type: sequelize.STRING(255),
-            allowNull: false
+        city: {
+            type: String,
         },
-        birth_day:{
-            type: sequelize.DATE(),
-            allowNull: false
+        state: {
+            type: String,
         },
-        main_device:{
-            type: sequelize.STRING(255),
-            allowNull: false
-        },
-        user_picture:{
-            type: sequelize.STRING(255),
-            allowNull: true
-        },
-        picture_url:{
-            type: sequelize.STRING(255),
-            allowNull: true
-        },               
-        verified:{
-            type: sequelize.BOOLEAN,
-            allowNull: false
-        }        
+        number: {
+            type: String,
+            required: true
+        }
     }
-);
+});
 
-User.sync({force:false});
+const User = mongoose.model('User', userSchema);
 
+// Exportação do Modelo
 module.exports = User;

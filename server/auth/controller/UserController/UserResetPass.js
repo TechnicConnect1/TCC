@@ -4,9 +4,8 @@ const EmailOTP = require('../../model/EmailOTP');
 const bcrypt = require('bcrypt');
 
 exports.forgotPassword = async (req, res) => {
+    const { email } = req.body;
     try {
-        const { email } = req.body;
-        const Id = req.params.id;
         const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
         const salt = await bcrypt.genSalt(12);
         const OTPHash = await bcrypt.hash(otp, salt);
@@ -16,14 +15,14 @@ exports.forgotPassword = async (req, res) => {
             res.status(422).json({ msg: 'Email inválido' });
         };
 
-        const isUser = await User.findById(Id);
+        const isUser = await User.findOne({ email });
 
         if (isUser.email !== email) {
             res.status(422).json({ msg: 'Email inválido' });
         }
 
         // Checar se o Usuário existe
-        const userExists = await User.findOne({ email: email });
+        const userExists = await User.findOne({ email });
 
         if (!userExists) {
             return res.status(422).json({ msg: 'Não existe um usuário com este email!' });
@@ -47,7 +46,7 @@ exports.forgotPassword = async (req, res) => {
         });
 
         const newOTPVerification = await new EmailOTP({
-            userId: Id,
+            email,
             uniqueString: OTPHash,
             createdAt: Date.now(),
             expiresAt: Date.now() + 3600000,
@@ -58,7 +57,6 @@ exports.forgotPassword = async (req, res) => {
         res.status(200).json({
             msg: 'E-mail enviado no seu Inbox.',
             data: {
-                userId: Id,
                 email: email
             }
         });
@@ -69,14 +67,15 @@ exports.forgotPassword = async (req, res) => {
 };
 
 exports.changePassword = async (req, res) => {
-    const { Id, otp, newPassword } = req.body;
+    const { otp, newPassword } = req.body;
+    const email = req.headers.email;
     try {
-        if (!Id || !otp || !newPassword) {
+        if (!otp || !newPassword) {
             res.status(422).json({ msg: 'Código de verificação ou Senha inválidos.' });
             return;
         };
 
-        const otpMatch = await EmailOTP.findOne({ userId: Id });
+        const otpMatch = await EmailOTP.findOne({ email });
 
         if (!otpMatch) {
             res.status(422).json({ msg: 'Nenhum código de verificação encontrado.' });
@@ -86,7 +85,7 @@ exports.changePassword = async (req, res) => {
         const { expiresAt, uniqueString: OTPHash } = otpMatch;
 
         if (expiresAt < Date.now()) {
-            await EmailOTP.deleteOne({ userId: Id });
+            await EmailOTP.deleteOne({ email });
             res.status(500).json({ msg: 'Seu código de verificação expirou, solicite outro código.' });
             return;
         };
@@ -100,12 +99,13 @@ exports.changePassword = async (req, res) => {
 
         const salt = await bcrypt.genSalt(12);
         const newPasswordHash = await bcrypt.hash(newPassword, salt);
-
-        await User.updateOne({ cod_user: Id }, { password: newPasswordHash });
-
-        await EmailOTP.deleteOne({ userId: Id });
-
-        return res.status(200).json({ validOTP });
+        if (validOTP) {
+            await User.updateOne({ email }, { password: newPasswordHash });
+            await EmailOTP.deleteOne({ email });
+            return res.status(200).json({ msg: 'OTP Confirmado, senha alterada com sucesso!' });
+        } else {
+            res.status(500).json({ msg: 'OTP Inválido!' });
+        };
     } catch (error) {
         console.error(error)
         res.status(500).json({ msg: error });
