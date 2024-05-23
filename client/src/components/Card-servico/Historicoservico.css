@@ -1,0 +1,29 @@
+.historico-servico {
+    background-color: black;
+    padding: 15px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* Estilos para os textos dentro do card */
+.historico-item .data,
+.historico-item .desc,
+.historico-item .status {
+    color: white;
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.historico-item .dataServico,
+.historico-item .descText {
+    color: white;
+    font-size: 22px;
+    font-weight: 100;
+}
+
+.historico-item .statusName {
+    color: green;
+    font-weight: bold;
+}

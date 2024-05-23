@@ -1,0 +1,124 @@
+.iconClose-2 {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  color: white;
+}
+
+.login-popup {
+  position: fixed;
+  z-index: 2705;
+  width: 100%;
+  height: 100%;
+  background-color: #00000090;
+  display: grid;
+}
+
+.flex-box{
+  display: flex;
+  gap: 30px;
+}
+.login-popup-container {
+  place-self: center;
+  min-width: 500px;
+  color: #808080;
+  background-color: #171717;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 25px 30px;
+  border-radius: 8px;
+  font-size: 14px;
+  animation: fadeIn 0.5s;
+}
+
+.login-popup-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+#tel{
+  width: 60%;
+}
+
+#date{
+ width: 40%;
+}
+
+.negocio, .tecnico{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 1rem;
+}
+.checkbox-input {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  background-color: #171717;
+}
+
+.login-popup-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-popup-inputs input {
+  outline: none;
+  border: 1px solid #171717;
+  padding: 15px;
+  border-radius: 4px;
+  background-color: #1c1c1c;
+  color: white;
+  font-size: 18px;
+}
+
+.login-popup-container button {
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  color: white;
+  background-color: #1e8efb;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.login-popup-condition {
+  display: flex;
+  align-items: start;
+  gap: .8rem;
+}
+
+
+.login-popup-condition input {
+  margin-top: 12px;
+}
+
+.login-popup-condition p {
+  font-size: 18px;
+  color: #808080;
+}
+
+.login-popup p span {
+  color: #1e8efb;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.login-popup p {
+  margin-bottom: 0;
+  font-size: 18px;
+}
+
+
+.login-popup .profissional {
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+}

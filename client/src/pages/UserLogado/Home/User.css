@@ -1,0 +1,271 @@
+.userSection,
+.userSection-2,
+.userSection-3,
+.userSection-5 {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8%;
+    width: 100%;
+}
+
+.userSection-4 {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: 8%;
+    width: 100%;
+    background-color: #161515;
+}
+
+.user-home-imagem {
+    overflow: hidden;
+}
+
+.userSection-2 {
+    flex-direction: column;
+    background-color: #0F0F0F;
+}
+
+.container-home-user p {
+    font-size: 22px;
+    line-height: 2;
+    max-width: 900px;
+}
+
+
+
+.container-home-user button,
+.container-home-user-3 button {
+    padding: 20px 45px;
+    background-color: #1e8efb;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.right-card button {
+    padding: 10px 25px;
+    background-color: #1e8efb;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.container-home-user-2{
+    width: 100%;
+}
+
+.container-home-user-3 {
+    width: 100%;
+}
+
+.container-home-user-3 button {
+    margin-top: 4rem;
+}
+
+.user-home-imagem {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.card-historico-servico,
+.cards-orcamento {
+    background-color: #1C1C1C;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+}
+
+.card-orcamento {
+    background-color: black;
+    padding: 15px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.historico-item .label {
+    color: white;
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.historico-item .resposta {
+    color: white;
+    font-size: 22px;
+    font-weight: 100;
+}
+
+
+.userSection-3 .container {
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #1C1C1C;
+    padding: 15px;
+    /* Oculta a barra de rolagem horizontal */
+}
+
+
+/* .userSection-3 .container {
+    white-space: nowrap;
+
+} */
+
+.bottom-orcamento {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cards {
+    display: flex;
+    gap: 3rem;
+}
+
+
+
+
+.content-text-home-user-4 h1 {
+    text-align: center;
+}
+
+.avaliacaoCard {
+    display: flex;
+    width: 100%;
+    gap: 3rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.top-card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.user-avatar-icone {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1C1C1C;
+}
+
+.user-avatar-icon {
+    color: #494343;
+    width: 18px;
+    height: 18px;
+}
+
+.card-avaliacao {
+    max-width: 450px;
+    background-color: black;
+    padding: 20px;
+}
+
+.bottom-card-avaliacao p {
+    margin-bottom: 0;
+    margin-top: 1rem;
+}
+
+.add-more {
+    background-color: #1e8efb;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.add-more:hover{
+    scale: 1.1;
+}
+
+.add-icon {
+    width: 100px;
+    height: 100px;
+}
+
+.card-avaliacao-add {
+    display: flex;
+    justify-content: center;
+    width: 350px;
+}
+
+
+@media screen and (max-width:1200px) {
+    .user-home-imagem img {
+        width: 150px;
+    }
+
+}
+
+@media screen and (max-width:600px) {
+    .user-home-imagem {
+        display: none;
+    }
+
+    .userSection {
+        margin-top: 70px;
+    }
+
+    .userSection,
+    .userSection-2,
+    .userSection-3,
+    .userSection-5,
+    .userSection-4 {
+        padding: 5%;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    p {
+        font-size: 18px;
+        text-align: justify;
+    }
+
+    .container-home-user p {
+        font-size: 18px;
+        line-height: 1.8;
+        width: 100%;
+    }
+
+    .container-home-user button,
+    .container-home-user-3 button {
+        padding: 15px 25px;
+        width: 100%;
+        font-size: 18px;
+        width: 100%;
+    }
+
+    .right-card button {
+        font-size: 18px;
+        padding: 15px 25px;
+        width: 100%;
+    }
+}

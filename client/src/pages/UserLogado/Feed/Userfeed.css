@@ -1,0 +1,19 @@
+.userfeed, .userfeed-2{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 7% 0;
+    display: flex;
+    justify-content: flex-start;
+    background: #171717;
+    overflow: hidden;
+}
+
+.userfeed main{
+    margin-left: 450px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+

@@ -1,0 +1,129 @@
+.cardPost{
+    width: 850px;
+    background-color: #121212;
+    padding: 25px;
+}
+
+.post-user{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    
+}
+
+.iconAvatar{
+    width: 45px;
+    height: 45px;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+}
+
+.iconAvatar .icon{
+    color: white;
+    height: 18px;
+}
+
+.name-user{
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.card-mensagem textarea {
+    min-height: 50px;
+    width: 100%;
+    font-size: 22px;
+    color: #fff;
+    padding: 20px 0;
+    border-radius: 0;
+    outline: none;
+    border: none;
+    resize: none;
+}
+
+.card-post-buttons{
+    display: flex;
+    gap: 5rem;
+    justify-content: space-between;
+    padding: 18px 0;
+}
+
+.card-post-button{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    
+}
+
+.card-post-button span{
+    color: #fff;
+    font-size: 22px;
+}
+
+.buttons-left{
+    display: flex;
+    gap: 100px;
+    align-items: center;
+}
+
+.card-post-icon{
+    color: green;
+    width: 30px;
+    height: 30px;
+}
+
+.card-button-submit button{
+    font-size: 22px;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #1e8efb;
+    padding: 5px 35px 5px 35px;
+}
+
+@media screen and (max-width:850px) {
+    .cardPost{
+        width:100%;
+    }
+    .buttons-left{
+        gap: 50px;
+    }
+}
+
+@media screen and (max-width:440px) {
+    .buttons-left{
+        gap: 35px;
+    }
+
+    .card-post-buttons{
+        gap: 2rem;
+    }
+
+    .card-mensagem textarea {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .card-button-submit button{
+        font-size: 18px;
+        padding: 5px 20px 5px 20px;
+    }
+
+    .card-post-icon{
+        width: 18px;
+        height: 18px;
+    }
+
+    .card-post-button span{
+        font-size: 18px;
+    }
+
+    .name-user{
+        font-size: 19px;
+    }
+    
+}

@@ -1,0 +1,16 @@
+.star-rating {
+  margin-top: .2rem;
+  font-size: 1.3rem;
+}
+
+.star {
+  cursor: pointer;
+}
+
+.star-icon {
+  color: #ccc;
+}
+
+.filled {
+  color: gold;
+}

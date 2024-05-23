@@ -1,0 +1,189 @@
+.card-profile-tecnico {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 500px;
+    background-color: #161515;
+    padding: 15px;
+    height: 600px;
+    gap: 2rem;
+}
+
+.perfil-tecnico-2 p {
+    color: gray;
+}
+
+.profile-dados {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.profile-dados h3 {
+    color: white;
+    font-weight: 400;
+}
+
+.perfil-tecnico-2 {
+    min-height: 100vh;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.perfil-tecnico-2 h1 {
+    font-weight: 600;
+}
+
+.perfil-tecnico-container-2 {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.perfil-tecnico-container-2 .label {
+    color: white;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.perfil-tecnico-container-2 .resposta {
+    color: rgb(80, 78, 78);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.dados-tecnico-container-2,
+.dados-negocio-container {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    width: 1200px;
+    background-color: #161515;
+    padding: 30px 40px;
+}
+
+.dados-tecnico-content,
+.dados-negocio-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #171717;
+    gap: .5rem;
+    padding: 20px;
+}
+
+.profile-img {
+    width: 250px;
+    height: 250px;
+    background-color: #0f0f0f;
+    border-radius: 50%;
+    border: 10px solid rgb(80, 78, 78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.profile-img .icon {
+    width: 80px;
+    height: 80px;
+    color: rgb(80, 78, 78);
+}
+
+.btn-update-user {
+    width: 100%;
+}
+
+.btn-update-user button {
+    width: 100%;
+    padding: 15px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: #1e8efb;
+    font-size: 22px;
+    color: white;
+    margin-top: 1rem;
+}
+
+.dados-tecnico-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .perfil-tecnico-2 {
+        padding: 8%;
+    }
+
+    .perfil-tecnico-container-2 {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .dados-tecnico-container-2,
+    .dados-negocio-container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 800px) {}
+
+@media screen and (max-width: 500px) {
+    .perfil-tecnico-2 {
+        padding: 4%;
+    }
+
+    .card-profile-tecnico {
+        width: 100%;
+        padding: 15px 20px;
+        gap: 1rem;
+    }
+
+    .profile-dados {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .profile-dados h3 {
+        color: white;
+        font-weight: 400;
+    }
+
+    .perfil-tecnico-2 {
+        min-height: 100vh;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .perfil-tecnico-2 h2 {
+        font-size: 30px;
+    }
+
+    .perfil-tecnico-2 h1 {
+        font-weight: 600;
+    }
+
+    .profile-img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .dados-tecnico-container-2,
+    .dados-negocio-container {
+        padding: 15px 20px;
+    }
+
+    .perfil-tecnico-container-2 .label {
+        font-size: 18px;
+    }
+
+    .perfil-tecnico-container-2 .resposta {
+        font-size: 18px;
+    }
+}

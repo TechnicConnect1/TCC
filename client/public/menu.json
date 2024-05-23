@@ -1,0 +1,68 @@
+[
+    {
+        "_id": 1,
+        "name": "Troca de Bateria",
+        "description": "Troca da bateria do seu smartphone por uma nova para restaurar a vida útil da bateria e prolongar o tempo de uso do dispositivo.",
+        "image": "/images/2.png",
+        "category": "celular",
+        "price": "De R$100 até R$150"
+    },
+    {
+        "_id": 2,
+        "name": "Troca de Tela",
+        "description": "Substituição do display quebrado do seu smartphone para restaurar a funcionalidade da tela, proporcionando uma experiência visual nítida e sem danos.",
+        
+        "image": "/images/1.png",
+        "category": "celular",
+        "price": "De R$100 até R$150"
+    },
+    {
+        "_id": 3,
+        "name": "Conector Carregamento",
+        "description": "Conserto do conector danificado do seu smartphone para garantir que o dispositivo possa ser carregado corretamente e manter a conectividade com outros aparelhos",
+        "image": "/images/6.png",
+        "category": "celular",
+        "price": "De R$100 até R$150"
+    },
+    {
+        "_id": 4,
+        "name": "Atualização de Software",
+        "description": "Atualização do sistema operacional do seu smartphone para aproveitar as últimas melhorias de desempenho, segurança e recursos oferecidos pelo fabricante.",
+        "image": "/images/5.png",
+        "category": "celular",
+        "price": "De R$50 até R$150"
+    },
+    {
+        "_id": 5,
+        "name": "Substituição de Câmera",
+        "description": "Troca da câmera danificada do seu smartphone para restaurar a qualidade das fotos e vídeos capturados, garantindo imagens nítidas e cores precisas.",
+        "image": "/images/7.png",
+        "category": "celular",
+        "price": "De R$150 até R$250"
+    },
+
+    {
+        "_id": 6,
+        "name": "Botão Liga/Desliga",
+        "description": "Conserto do botão de ligar/desligar do seu smartphone para restaurar a funcionalidade de ligar e desligar o dispositivo de forma adequada.",
+        "image": "/images/8.png",
+        "category": "celular",
+        "price": "De R$80 até R$150"
+    },
+    {
+        "_id": 7,
+        "name": "Limpeza Interna",
+        "description": "Limpeza interna do seu smartphone para remover poeira, sujeira e outros resíduos que possam afetar o desempenho e a durabilidade do dispositivo.",
+        "image": "/images/3.png",
+        "category": "celular",
+        "price": "De R$60 até R$150"
+    },
+    {
+        "_id": 8,
+        "name": "Outro",
+        "description": "Descreva manualmente o problema que está enfrentando com seu celular. Seja um bug persistente, um erro estranho ou uma questão técnica específica.",
+        "image": "/images/9.png",
+        "category": "celular",
+        "price": "A definir valor"
+    }
+]

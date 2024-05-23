@@ -1,0 +1,19 @@
+.content-area {
+    & > section {
+      margin-bottom: 16px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .name-dashboard{
+    margin-top: 4rem;
+    font-size: 35px;
+    font-weight: 600;
+  }
+
+  .content-area h1{
+    font-weight: 600;
+    font-size: 40px;
+  }

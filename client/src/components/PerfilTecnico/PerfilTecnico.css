@@ -1,0 +1,91 @@
+.profileDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.profileDiv img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid #2e2e2e;
+    background-color: #2e2e2e;
+}
+
+.perfil-tecnico{
+    width: 100%;
+    background-color: #171717;
+    padding: 25px;
+    height: 450px;
+    border-radius: 25px;
+}
+
+.perfil-tecnico-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.imagem-avatar-tecnico{
+    width: 250px;
+    height: 250px;
+    border: 2px solid gray;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.imagem-avatar-tecnico:hover{
+    scale: 1.04;
+}
+
+.dados-tecnico{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tecnico-dados .label{
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.imagem-avatar-tecnico .icon-avatar{
+    width: 80px;
+    height: 80px;
+    color: gray;
+}
+
+.atualizar-dados{
+    border: none;
+    outline: none;
+    padding: 15px 15px;
+    font-size: 22px;
+    background-color: rgba(255, 0, 0, 0.74);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+    margin-bottom: 2rem;
+}
+.btn-atualizar-dados{
+    display: flex;
+    height: 100%;
+    align-items:end;
+}
+
+.content-left{
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+.atualizar-dados:hover{
+    scale: 1.1;
+}

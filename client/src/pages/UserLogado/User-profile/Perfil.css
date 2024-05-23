@@ -1,0 +1,74 @@
+.perfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    height: auto;
+    padding-top: 200px;
+}
+
+.container-perfil{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    margin-bottom: 5rem;
+}
+
+.config{
+    width: 100%;
+    max-width: 1000px;
+    padding: 0px 30px;
+}
+
+.conta{
+    margin-bottom: 3rem;
+}
+
+.conta, .configuracoes{
+    background-color: #0F0F0F;
+    padding: 25px;
+    /* border: 1px solid rgb(49, 48, 48); */
+}
+
+.conta h3, .configuracoes h3{
+    color: #1e8efb;
+    font-size: 25px;
+    margin-bottom: 1.2rem;
+}
+
+.conta p, .configuracoes p{
+    margin-bottom: 0;
+}
+
+.contaSpan{
+    color: gray;
+}
+
+.line{
+    margin: 1rem 0 1rem 0;
+}
+
+@media screen and (max-width: 1300px) {
+    .container-perfil{
+        flex-direction: column;
+    }
+
+    .perfil-left{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 3rem;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+   .perfil{
+    padding-top: 200px;
+   }
+
+   .conta p, .configuracoes p{
+    font-size: 18px;
+}
+}

@@ -1,0 +1,28 @@
+.feed-tecnico{
+   display: flex;
+   justify-content: space-around;
+}
+
+.feed-tecnico-container{
+    max-width: 850px;
+    width: 100%;
+}
+
+.feed-tecnico .comentario-item{
+    background-color: #161515;
+}
+.contact-button {
+    background-color: #1e8efb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-size: 22px;
+    transition: all 300ms ease-in-out;
+}
+
+.contact-button:hover {
+    background-color: #0056b3;
+}

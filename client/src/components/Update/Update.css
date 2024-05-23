@@ -1,0 +1,72 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2701; /* Colocar o modal acima do conteúdo */
+}
+
+.modal-content {
+    background: #171717;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.divPicture{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+    object-fit: cover;
+}
+
+.profile-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.profile-form input{
+    width: 100%;
+    background-color: #0f0f0f;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+}
+.modal-content h2{
+    font-size: 30px;
+    margin-bottom: 1rem;
+}
+.statusUpload{
+    text-align: center;
+    margin-bottom: 0;
+}
+.form-buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.form-buttons button{
+    background-color: #1e8efb;
+    border: none;
+    outline: none;
+    padding: 15px 0px;
+    width:45%;
+    font-size: 18px;
+    color: white;
+}
+
+.form-buttons .cancelar{
+    background-color: rgb(148, 15, 15);
+}

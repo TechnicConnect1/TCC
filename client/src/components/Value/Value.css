@@ -1,0 +1,96 @@
+:root{
+    --font-size-small: 14px;
+    --font-size-medium: 18px;
+    --font-size-large: 22px;
+    --font-size-main-heading: 32px;
+    --font-size-subheading: 24px;
+    --font-size-minor-heading: 20px;
+}
+
+.accordion {
+    width: 90%; /* Alterado para porcentagem para torná-lo responsivo */
+    margin: 0 auto;
+}
+
+.accordionCard .item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 2%; /* Alterado para porcentagem para torná-lo responsivo */
+    row-gap: 32px; /* Alterado para unidade de viewport para torná-lo responsivo */
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    padding:  24px 24px 15px 24px; /* Alterado para unidade de viewport para torná-lo responsivo */
+    margin-bottom: 2vw; /* Alterado para unidade de viewport para torná-lo responsivo */
+    background-color: #171717;
+}
+
+
+.number{
+    color: #1e8efb;
+    font-size: 22px;
+}
+
+.text {
+    color: #1e8efb;
+    font-size: 1.5rem; /* Alterado para unidade de viewport para torná-lo responsivo */
+    font-weight: 600;
+}
+
+.icon {
+    width: 24px; /* Alterado para unidade de viewport para torná-lo responsivo */
+    height: 24px; /* Alterado para unidade de viewport para torná-lo responsivo */
+    color: #1e8efb;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.hidden-box {
+    grid-column: span 3; /* Alterado para ocupar todas as colunas */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.hidden-box p {
+    line-height: 1.6;
+    margin-bottom: 2vw; /* Alterado para unidade de viewport para torná-lo responsivo */
+}
+
+.active-box {
+    max-height: 245px; /* Alterado para unidade de viewport para torná-lo responsivo */
+    margin-bottom: 2vw; /* Alterado para unidade de viewport para torná-lo responsivo */
+    transition: max-height 0.3s ease;
+}
+
+.rotate {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+/* Consulta de mídia para ajustar o layout em telas menores */
+@media (max-width: 768px) {
+    .container-home5 h1{
+        font-size: var(--font-size-main-heading);
+    }
+    .item {
+        grid-template-columns: auto 1fr;
+        column-gap: 4%;
+        padding: 4vw; /* Ajustado o padding para telas menores */
+    }
+
+    .number,
+    .icon {
+        font-size: 4vw; /* Ajustado o tamanho da fonte e ícone para telas menores */
+        width: 4vw;
+        height: 6vw;
+    }
+
+    .text{
+        font-size: var(--font-size-medium);
+    }
+
+    .hidden-box p {
+        font-size: var(--font-size-small);
+        margin-bottom: 4vw; /* Ajustado a margem inferior para telas menores */
+    }
+}
