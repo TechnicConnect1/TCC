@@ -24,7 +24,7 @@ const storage = getStorage(firebaseApp);
 
 /* Rota de Registro */
 exports.register = async (req, res) => {
-    const { name, email, password, confirmPassword, verified, contact, birth_day, address, technician } = req.body;
+    const { name, email, password, confirmPassword, verified, contact, birth_day, address, user_type } = req.body;
     const file = req.file;
 
     // Validação de Dados
@@ -101,18 +101,17 @@ exports.register = async (req, res) => {
         const urlFinal = await getDownloadURL(fileRef);
 
         // Criar Usuário
-        const user = new User({ name, email, password: passwordHash, verified, contact, device, birth_day, user_picture: fileName, user_picture_url: urlFinal, address, technician });
+        const user = new User({ name, email, password: passwordHash, verified, contact, device, birth_day, user_picture: fileName, user_picture_url: urlFinal, address, user_type });
 
         // Adicionar dados de Técnico
-        if (technician == true) {
-            await user.updateOne({ technician: true });
+        if (user_type == 'Técnico') {
             console.log('É Técnicio');
             try {
                 const { CNPJ, specialization, rating } = req.body;
 
                 // Validações
 
-                const technicianData = new TechnicianData({ CNPJ, specialization, rating });
+                const technicianData = new TechnicianData({ CNPJ, business_name, specialization, rating });
                 await technicianData.save(technicianData);
 
             } catch (error) {

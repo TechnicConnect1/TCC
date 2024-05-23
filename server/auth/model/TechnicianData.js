@@ -8,13 +8,16 @@ const technicianDataSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
+    business_name: {
+        type: String,
+        required: true
+    },
     specialization: {
         type: String,
         required: true
     },
     rating: {
         type: Number,
-        required: true,
         default: 0
     }
 });

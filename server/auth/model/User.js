@@ -28,9 +28,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    technician: {
-        type: Boolean,
-        default: false
+    user_type: {
+        type: String,
+        enum: ['User', 'Technician'],
+        default: 'User'
     },
     user_picture: {
         type: String,

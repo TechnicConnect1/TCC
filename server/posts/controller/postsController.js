@@ -18,7 +18,6 @@ const firebaseApp = initializeApp(firebaseConfig);
 const storage = getStorage(firebaseApp);
 
 exports.getTimeline = async (req, res) => {
-    let postArray = []
     try {
         const currentUser = await User.findById(req.headers.id);
         const userPosts = await Posts.find({ author: currentUser._id });
@@ -31,7 +30,7 @@ exports.getTimeline = async (req, res) => {
 
 // Enviar Post
 exports.sendPost = async (req, res) => {
-    const { author } = req.body;
+    const { author, title } = req.body;
     const file = req.file;
     try {
         // Firebase file
@@ -40,8 +39,8 @@ exports.sendPost = async (req, res) => {
         await uploadBytes(fileRef, file.buffer);
         const urlFinal = await getDownloadURL(fileRef);
 
-        // Criar Usuário
-        const post = new Posts({ author, picture: fileName, picture_url: urlFinal });
+        // Criar Post
+        const post = new Posts({ author, title, picture: fileName, picture_url: urlFinal, likes, comments });
 
         await post.save(post);
 

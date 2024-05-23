@@ -5,6 +5,7 @@ const userAuthRoutes = require('../auth/routes/User/UserAuthRoutes.js');
 const userAccountRoutes = require('../auth/routes/User/UserAccountRoutes.js');
 const messageRoutes = require('../chat/routes/MessageRoutes.js');
 const postsRoutes = require('../posts/routes/PostsRoutes.js');
+const budgetRoutes = require('../budget/routes/budgetRoutes.js');
 import { app } from '../chat/socket/socket.js';
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -25,5 +26,8 @@ app.use('/chat/', messageRoutes);
 
 // Posts Routes
 app.use('/posts/', postsRoutes);
+
+// Estimate Routes
+app.use('/budget/', budgetRoutes);
 
 module.exports = app;
