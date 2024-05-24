@@ -8,7 +8,7 @@ const protectRoute = require('../../../middleware/protectRoute.js');
 router.get('/', UserController.publicRoute);
 
 // Rota Privada
-router.get('/:id', protectRoute,UserController.privateRoute);
+router.get('/user/', protectRoute, UserController.privateRoute);
 
 // Exportação do Router
 module.exports = router;

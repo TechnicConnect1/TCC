@@ -5,9 +5,10 @@ const TechnicianData = require('../../model/TechnicianData');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 const generateToken = require('../../../utils/generateToken.js');
+const validateCNPJ = require('../../../utils/validateCNPJ.js');
 const { initializeApp } = require('firebase/app');
 const { getStorage, ref, getDownloadURL, uploadBytes } = require('firebase/storage');
-const moment = require = ('moment');
+const moment = require('moment');
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -30,52 +31,52 @@ exports.register = async (req, res) => {
     // Validação de Dados
     if (!name || !email || !password || !address.cep || !address.number) {
         return res.status(422).json({ msg: 'Por favor, preencha todos os campos obrigatórios!' });
-    };
+    }
 
     if (!/^[a-zA-Z ]*$/.test(name)) {
         return res.status(422).json({ msg: 'Por favor, digite um nome válido!' });
-    };
+    }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
         return res.status(422).json({ msg: 'Por favor, digite um email válido!' });
-    };
+    }
 
     if (!/^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$/.test(password)) {
         return res.status(422).json({ msg: 'A senha deve conter entre 6 e 15 caracteres e incluir pelo menos uma letra maiúscula, um número e um caractere especial.' });
-    };
+    }
 
     if (!/^(?:\+55)?(?:[1-9]{2})?(?:9[1-9]\d{3})\d{4}$/.test(contact)) {
         return res.status(422).json({ msg: 'Insira um número de telefone válido!' });
-    };
+    }
 
     const parsedBirthDay = moment(birth_day, 'DD-MM-YYYY', true);
 
     if (!parsedBirthDay.isValid()) {
         return res.status(422).json({ msg: 'Data de nascimento inválida!' });
-    };
+    }
 
     if (!/^\d{5}-\d{3}$|^\d{8}$/.test(address.cep)) {
         return res.status(422).json({ msg: 'Por favor, digite um CEP válido!' });
-    };
+    }
 
     if (!/^\d{1,5}$/.test(address.number)) {
         return res.status(422).json({ msg: 'Por favor, digite um número válido!' });
-    };
+    }
 
     if (password !== confirmPassword) {
         return res.status(422).json({ msg: 'As senhas não coincidem!' });
-    };
+    }
 
     // Checar se o Usuário existe
     const userExists = await User.findOne({ email: email });
 
     if (userExists) {
         return res.status(422).json({ msg: 'Um usuário com este email já existe!' });
-    };
+    }
 
     if (!file) {
         return res.status(422).json({ msg: 'Não há imagem!' });
-    };
+    }
 
     try {
         const response = await axios.get(`https://brasilapi.com.br/api/cep/v1/${address.cep}`);
@@ -83,7 +84,7 @@ exports.register = async (req, res) => {
 
         if (!data) {
             return res.status(404).json({ error: 'CEP não encontrado' });
-        };
+        }
 
         address.street = data.street;
         address.neighborhood = data.neighborhood;
@@ -101,33 +102,47 @@ exports.register = async (req, res) => {
         const urlFinal = await getDownloadURL(fileRef);
 
         // Criar Usuário
-        const user = new User({ name, email, password: passwordHash, verified, contact, device, birth_day, user_picture: fileName, user_picture_url: urlFinal, address, user_type });
+        const user = new User({
+            name,
+            email,
+            password: passwordHash,
+            verified,
+            contact,
+            birth_day: parsedBirthDay.toDate(),
+            user_picture: fileName,
+            user_picture_url: urlFinal,
+            address,
+            user_type
+        });
 
         // Adicionar dados de Técnico
-        if (user_type == 'Técnico') {
-            console.log('É Técnicio');
-            try {
-                const { CNPJ, specialization, rating } = req.body;
+        if (user_type === 'Technician') {
+            const { CNPJ, business_name, specialization, rating } = req.body;
 
-                // Validações
+            if (!validateCNPJ(CNPJ)) {
+                return res.status(422).json({ msg: 'CNPJ inválido!' });
+            }
 
-                const technicianData = new TechnicianData({ CNPJ, business_name, specialization, rating });
-                await technicianData.save(technicianData);
+            const technicianData = new TechnicianData({
+                user: user._id,
+                CNPJ,
+                business_name,
+                specialization,
+                rating
+            });
 
-            } catch (error) {
-                console.error(error);
-                res.status(500).json({ msg: 'fodeo mano' });
-            };
-        };
+            await technicianData.save();
+        }
 
-        await user.save(user);
+        await user.save();
 
         res.status(201).json({ msg: `O usuário ${user.name} foi cadastrado com sucesso!` });
     } catch (error) {
         console.error('Erro ao cadastrar usuário:', error);
         res.status(500).json({ msg: 'Ocorreu um erro ao cadastrar o usuário.' });
-    };
+    }
 };
+
 
 /* Logar Usuário */
 exports.login = async (req, res) => {

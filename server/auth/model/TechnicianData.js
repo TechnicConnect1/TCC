@@ -3,9 +3,15 @@ const mongoose = require('mongoose');
 
 // Modelo de Técnico
 const technicianDataSchema = new mongoose.Schema({
-    CNPJ: {
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required: true,
+        unique: true
+    },
+    CNPJ: {
         type: String,
+        required: true,
         unique: true
     },
     business_name: {

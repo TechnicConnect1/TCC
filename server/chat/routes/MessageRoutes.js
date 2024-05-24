@@ -5,8 +5,8 @@ const MessageController = require('../controller/MessageController/MessageContro
 const ProtectRoute = require('../../middleware/protectRoute.js');
 
 // Rotas
-router.post('/send/:id', ProtectRoute, MessageController.sendMessage);
-router.get('/:id', ProtectRoute, MessageController.getMessages);
+router.post('/chat/send/:id', ProtectRoute, MessageController.sendMessage);
+router.get('/chat/:id', ProtectRoute, MessageController.getMessages);
 // router.get('/getUsers', ProtectRoute, MessageController);
 
 // Exportação do Router
