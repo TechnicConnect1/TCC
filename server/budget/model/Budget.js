@@ -1,16 +1,15 @@
 const mongoose = require('mongoose');
 
 const budgetSchema = mongoose.Schema({
-    userId: {
+    technicianId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    problem_type: {
-        type: String,
-        required: true
-    },
-    problem_details: {
-        type: String,
+    used_resources: [{
+        type: String
+    }],
+    labor: {
+        type: Number,
         required: true
     },
     value: {
@@ -23,8 +22,8 @@ const budgetSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['Avaliable', 'Not avaliable'],
-        default: 'Avaliable'
+        enum: ['Paid', 'Not Paid'],
+        default: 'Not Paid'
     }
 }, { timestamps: true }
 );
