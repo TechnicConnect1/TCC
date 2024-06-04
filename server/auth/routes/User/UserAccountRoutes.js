@@ -6,16 +6,16 @@ const ResetPass = require('../../controller/UserController/UserResetPass');
 const protectRoute = require('../../../middleware/protectRoute.js');
 
 // Rota de Alteração de Dados
-router.patch('/account/update/:id', accountController.updateData);
+router.patch('/update/:id', protectRoute, accountController.updateData);
 
 // Rota de Exclusão de Usuário
-router.delete('/account/delete/:id', accountController.deleteUser);
+router.delete('/delete/:id', protectRoute, accountController.deleteUser);
 
 // Rota de Verificação para alteração de senha
-router.post('/account/resetPassword/', ResetPass.forgotPassword);
+router.post('/resetPassword/', ResetPass.forgotPassword);
 
 // Rota de Ateração de Senha
-router.post('/account/changePassword/', ResetPass.changePassword);
+router.post('/changePassword/', ResetPass.changePassword);
 
 // Exportação do Router
 module.exports = router;

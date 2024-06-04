@@ -1,0 +1,277 @@
+    .orcamento {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 100px;
+    }
+
+    .container-orcamento {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .content-text {
+        width: 50%;
+    }
+
+    .input-area {
+        position: relative;
+        width: 100%;
+        height: 60px;
+        margin: 10px 0;
+    }
+
+    .input-area input {
+        width: 100%;
+        height: 100%;
+        background: #121212;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 8px;
+        font-size: 22px;
+        color: #fff;
+        padding: 20px 45px 20px 20px;
+    }
+
+    #servico-area {
+        min-height: 200px;
+        width: 100%;
+        background: #121212;
+        border-radius: 8px;
+        font-size: 22px;
+        color: #fff;
+        padding: 20px;
+        margin-top: 10px;
+        margin-bottom: 60px;
+    }
+
+    .orcamento .btn {
+        width: 100%;
+    }
+
+    .form-orcamento h2 {
+        margin-bottom: 2rem;
+    }
+
+    .form-orcamento {
+        width: 100%;
+        width: 700px;
+        background-color: black;
+        padding: 30px 40px;
+        border-radius: 20px;
+        box-shadow: 0 0 20px 3px;
+    }
+
+    .btn2 {
+        background-color: transparent;
+        padding: 15px 40px;
+        border: 2px solid #1e8efb;
+        color: #1e8efb;
+        font-weight: bold;
+        font-size: 22px;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+    }
+
+    .btn2:hover {
+        transform: scale(1.1) translateY(10px);
+        background-color: #1e8efb;
+        color: black;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .content-text {
+            width: 100%;
+            text-align: center;
+        }
+
+        .container-orcamento {
+            padding: 0px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .input-area {
+            height: 50px;
+        }
+
+        .input-area input {
+            font-size: 18px;
+            padding: 10px 15px;
+        }
+
+        #servico-area {
+            min-height: 150px;
+            font-size: 18px;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+
+        .form-orcamento,
+        .form {
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .btn2 {
+            padding: 10px 30px;
+            font-size: 18px;
+        }
+
+        .orcamento .btn {
+            padding: 10px 30px;
+            font-size: 18px;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .orcamento,
+        .orcamento2 {
+            padding: 20px;
+        }
+
+        .form-orcamento h2 {
+            font-size: 2rem;
+        }
+
+        .orcamento h1 {
+            margin-top: 100px;
+            font-size: 2.5rem;
+        }
+    }
+
+
+    /* ESTILIZAÇÃO DA SEÇÃO 2 */
+    .orcamento2 {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 100px;
+        background-color: #171717;
+    }
+
+    .container-orcamento2 {
+        padding: 50px 100px;
+    }
+
+    .container-orcamento2 h1,
+    .container-orcamento3 h1 {
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .content-text-orcamento {
+        margin-top: 3rem;
+    }
+
+    .content-text-orcamento h3 {
+        margin-bottom: 1.5rem;
+        color: white;
+        font-size: 25px;
+    }
+
+    .box-content {
+        display: flex;
+        gap: 2.5rem;
+    }
+
+    .num p {
+        background-color: #1e8efb;
+        padding: 0px 16px;
+        border-radius: 100%;
+    }
+
+
+    @media screen and (max-width: 1000px) {
+        .orcamento2 {
+            padding: 20px;
+        }
+
+        .box-content {
+            background-color: black;
+            padding: 20px 20px;
+            margin-top: 4rem;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .orcamento2 {
+            padding: 5px;
+        }
+
+        .container-orcamento2 {
+            padding: 100px 40px;
+        }
+
+        .container-orcamento2 h1 {
+            font-size: 2rem;
+        }
+
+        .content-text-orcamento {
+            margin-top: 2rem;
+            /* Reduzi a margem superior para dispositivos móveis */
+        }
+
+        .content-text-orcamento h3 {
+            margin-bottom: 1rem;
+            /* Reduzi a margem inferior para dispositivos móveis */
+            font-size: 1.5rem;
+            /* Reduzi o tamanho da fonte para dispositivos móveis */
+        }
+    }
+
+
+    /* ESTILIZAÇÃO DA SEÇÃO 3 */
+
+    .orcamento3 {
+        width: 100%;
+        min-height: 100vh;
+        padding: 4% 8%;
+        background: url("../../assets/bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: rgb(0, 0, 0, 0.9);
+        background-blend-mode: color;
+    }
+
+    .container-orcamento3 h1{
+        margin-bottom: 5rem;
+    }
+
+    .box-2 h3{
+        color: white;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+    }
+
+    .content-orcamento3{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4rem;
+    }
+
+
+
+
+    @media (max-width: 768px) {
+        .content-orcamento3 {
+            grid-template-columns: repeat(1, 1fr); 
+        }
+
+        .container-orcamento3 h1{
+            font-size: 2.5rem;
+        }
+    }

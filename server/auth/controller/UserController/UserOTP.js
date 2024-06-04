@@ -6,7 +6,7 @@ const User = require('../../model/User');
 
 /* Rota para envio de Email */
 exports.emailOTP = async (req, res) => {
-    const email = req.headers.email;
+    const { email } = req.body;
     try {
         const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
         const salt = await bcrypt.genSalt(12);

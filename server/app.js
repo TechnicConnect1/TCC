@@ -2,7 +2,7 @@
 require('dotenv').config();
 const app = require('./config/expressConfig');
 const mongoose = require('mongoose');
-const { server } = require('./chat/socket/socket.js');
+import { server } from './chat/socket/socket.js';
 
 //Dados DB
 const dbUser = process.env.DB_USER;

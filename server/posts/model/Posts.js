@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 // Modelo de Técnico
 const PostsSchema = new mongoose.Schema({
     author: {
-        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        type: String,
         required: true,
+        unique: true
     },
     picture: {
         type: String,

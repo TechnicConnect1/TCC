@@ -3,7 +3,6 @@ const Posts = require('../model/Posts');
 const User = require('../../auth/model/User');
 const { initializeApp } = require('firebase/app');
 const { getStorage, ref, getDownloadURL, uploadBytes } = require('firebase/storage');
-const deleteImage = require('../../helpers/upload/deleteImage.js');
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -31,8 +30,7 @@ exports.getTimeline = async (req, res) => {
 
 // Enviar Post
 exports.sendPost = async (req, res) => {
-    const { title } = req.body;
-    const { author } = req.headers.id;
+    const { author, title } = req.body;
     const file = req.file;
     try {
         // Firebase file
@@ -42,9 +40,9 @@ exports.sendPost = async (req, res) => {
         const urlFinal = await getDownloadURL(fileRef);
 
         // Criar Post
-        const post = new Posts({ author, title, picture: fileName, picture_url: urlFinal, likes: [], comments: 0 });
+        const post = new Posts({ author, title, picture: fileName, picture_url: urlFinal, likes, comments });
 
-        await post.save();
+        await post.save(post);
 
         res.status(201).json({ msg: `O ${author} fez uma publicação bem sucedida` });
     } catch (error) {
@@ -61,14 +59,12 @@ exports.deletePost = async (req, res) => {
     if (!post) {
         return res.status(404).json({ msg: 'Você só pode excluir os seus posts!' });
     };
-
     try {
-        deleteImage(post.picture);
+        deleteImage(Posts.picture);
         await Posts.deleteOne({ _id: id });
-        res.status(200).json({ msg: 'O post foi deletado com sucesso!' });
+        res.status(200).json({ msg: 'O usuário foi deletado com sucesso!' });
     } catch (error) {
-        console.error(error)
-        res.status(500).json({ msg: message.error });
+        res.status(500).json({ msg: error });
     };
 };
 
@@ -77,15 +73,14 @@ exports.likePost = async (req, res) => {
     const id = req.headers.id;
     const post = await Posts.findOne({ _id: id });
     try {
-        if (!post.likes.includes(req.headers.author)) {
-            await post.updateOne({ $push: { likes: req.headers.author } });
+        if (!post.likes.includes(req.body.author)) {
+            await post.updateOne({ $push: { likes: req.body.author } });
             return res.status(200).json({ msg: 'O post foi curtido com sucesso!' });
         } else {
-            await post.updateOne({ $pull: { likes: req.headers.author } });
+            await post.updateOne({ $pull: { likes: req.body.author } });
             return res.status(200).json({ msg: 'O post foi descurtido com sucesso!' });
         };
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: message.error });
+        res.status(500).json({ msg: error });
     };
 };
