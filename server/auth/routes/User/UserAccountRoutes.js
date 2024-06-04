@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const accountController = require('../../controller/UserController/UserAccount');
 const ResetPass = require('../../controller/UserController/UserResetPass');
+const protectRoute = require('../../../middleware/protectRoute.js');
 
 // Rota de Alteração de Dados
 router.patch('/account/update/:id', accountController.updateData);

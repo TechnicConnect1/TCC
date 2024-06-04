@@ -5,7 +5,7 @@ const User = require('../../model/User');
 // Rota Pública
 exports.publicRoute = (req, res) => {
     res.status(200).json({
-        msg: 'API Inicializada com sucesso!'
+        msg: 'API: Hello World!'
     });
 };
 
