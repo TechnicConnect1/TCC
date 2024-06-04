@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     birth_day: {
-        type: String,
+        type: Date,
         required: true
     },
     email: {
@@ -42,22 +42,25 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     address: {
-        required: true,
         cep: {
             type: String,
             required: true
         },
         street: {
             type: String,
+            required: true 
         },
         neighborhood: {
             type: String,
+            required: true 
         },
         city: {
             type: String,
+            required: true 
         },
         state: {
             type: String,
+            required: true
         },
         number: {
             type: String,

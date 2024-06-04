@@ -6,16 +6,16 @@ const authController = require('../../controller/UserController/UserAuth');
 const OTPController = require('../../controller/UserController/UserOTP');
 
 // Rota de Registro
-router.post('/register/', upload.single('file'), authController.register);
+router.post('/auth/register/', upload.single('file'), authController.register);
 
 //Rota de Verificação OTP
-router.get('/verify/', OTPController.emailOTP);
+router.get('/auth/verify/', OTPController.emailOTP);
 
 //Rota de Confirmação OTP
-router.post('/confirm/', OTPController.confirmOTP);
+router.post('/auth/confirm/', OTPController.confirmOTP);
 
 // Rota de Login
-router.post('/login/', authController.login);
+router.post('/auth/login/', authController.login);
 
 // Exportação do Router
 module.exports = router;

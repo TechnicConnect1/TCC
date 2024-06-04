@@ -5,13 +5,16 @@ const protectRoute = require('../../middleware/protectRoute.js');
 const upload = require('../../helpers/upload/uploadImage.js');
 
 // Rota Pública
-router.get('/timeline/', postsController.getTimeline);
+router.get('/posts/timeline/', postsController.getTimeline);
 
 // Rota Privada
-router.post('add/:id/', protectRoute, upload.single('file'), postsController.sendPost);
+router.post('/posts/add/', protectRoute, upload.single('file'), postsController.sendPost);
+
+// Rota para Curtir Post
+router.post('/posts/like/', protectRoute, postsController.likePost);
 
 // Rota para Deletar Post
-router.put('/delete/:id/', protectRoute, postsController.deletePost);
+router.delete('/posts/delete/', protectRoute, postsController.deletePost);
 
 // Exportação do Router
 module.exports = router;
