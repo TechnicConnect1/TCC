@@ -3,8 +3,9 @@ require('dotenv').config();
 const paypalToken = require('../../utils/paypalToken.js');
 const Budget = require('../model/Budget.js')
 const Technician = require('../../auth/model/TechnicianData.js');
+const generateToken = require('../../utils/generateToken.js');
 
-exports.createOrder = async () => {
+exports.createOrder = async (req, res) => {
     const id = req.headers.budgetId;
     const budgetData = Budget.findOne({ _id: id });
     const technicianData = Technician.findOne({ user: budgetData.technicianId });
@@ -51,5 +52,19 @@ exports.createOrder = async () => {
     });
     return response.data.links.find(link => link.rel === 'approve').href;
 };
-
+// Debug
 this.createOrder.then(result => console.log(result));
+
+exports.capturePayment = async (req, res) => {
+    const orderId = req.query.token;
+
+    const response = axios({
+        url: `${process.env.PAYPAL_BASE_URL}/v2/checkout/orders/${orderId}/capture`,
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${generateToken(user._id, res)}`
+        },
+    });
+    return response.data;
+};
