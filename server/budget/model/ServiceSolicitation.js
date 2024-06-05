@@ -13,10 +13,6 @@ const serviceSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    value: {
-        type: Number,
-        required: true
-    },
     device_model: {
         type: String,
         required: true

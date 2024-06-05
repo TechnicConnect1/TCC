@@ -7,8 +7,7 @@ exports.createBudget = async (req, res) => {
 
         const newBudget = new Budget({ technicianId: technicianId, problem_type, problem_details, value, device_model, status });
 
-        
-
+        await newBudget.save();
     } catch (error) {
         return res.status(500).json({ msg: 'Erro no servidor!' })
     };
