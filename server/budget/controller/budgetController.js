@@ -8,8 +8,9 @@ exports.createBudget = async (req, res) => {
         const newBudget = new Budget({ technicianId: technicianId, problem_type, problem_details, value, device_model, status });
 
         await newBudget.save();
+        return res.status(201).json({ newBudget });
     } catch (error) {
-        return res.status(500).json({ msg: 'Erro no servidor!' })
+        return res.status(500).json({ msg: 'Erro no servidor!' });
     };
 };
  
@@ -24,12 +25,12 @@ exports.updateBudget = async (req, res) => {
         if (updatedBudget.matchedCount === 0) {
             return res.status(404).json({ msg: 'Orçamento não encontrado!' });
         } else {
-            res.status(201).json({ msg: `O orçamento ${updatedBudget} foi alterado com sucesso!` });
+            res.status(201).json({ msg: `O orçamento foi alterado com sucesso! \n\n ${updatedBudget}` });
         };
     } catch (error) {
         res.status(500).json({ msg: error });
     };
-}
+};
 
 exports.deleteBudget = async (req, res) => {
     const id = req.headers.id;
