@@ -1,4 +1,5 @@
 const Conversation = require('../../model/Conversation');
+const User = require('../../../auth/model/User');
 const Message = require('../../model/Message');
 const { getReceiverSocketId, io } = require('../../socket/socket');
 
@@ -28,7 +29,7 @@ exports.sendMessage = async (req, res) => {
         await Promise.all([conversation.save(), newMessage.save()]);
 
         const receiverSocketId = getReceiverSocketId(receiverId);
-        if(receiverSocketId){
+        if (receiverSocketId) {
             io.to(receiverSocketId).emit('newMessage', newMessage);
         };
 
@@ -48,7 +49,7 @@ exports.getMessages = async (req, res) => {
             participants: { $all: [senderId, userToChatId] }
         }).populate('messages');
 
-        if(!conversation){
+        if (!conversation) {
             return res.status(200).json([]);
         };
 
@@ -56,6 +57,17 @@ exports.getMessages = async (req, res) => {
 
         res.status(200).json(messages);
 
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    };
+};
+
+exports.getUsersFilter = async (req, res) => {
+    try {
+        const loggedInUser = req.user._id;
+        const filteredUsers = User.find({ _id: { $ne: loggedInUser} }).select('-password');
+
+        res.status(200).json({ filteredUsers })
     } catch (error) {
         res.status(500).json({ msg: error.message });
     };

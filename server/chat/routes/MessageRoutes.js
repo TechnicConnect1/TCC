@@ -4,10 +4,14 @@ const router = express.Router();
 const MessageController = require('../controller/MessageController/MessageController');
 const ProtectRoute = require('../../middleware/protectRoute.js');
 
-// Rotas
+// Enviar Mensagens No Chat
 router.post('/chat/send/:id', ProtectRoute, MessageController.sendMessage);
+
+// Exibir Mensagens No Chat
 router.get('/chat/:id', ProtectRoute, MessageController.getMessages);
-// router.get('/getUsers', ProtectRoute, MessageController);
+
+// Filtrar Usuários 
+router.get('/chat/getUsers/', ProtectRoute, MessageController.getUsersFilter);
 
 // Exportação do Router
 module.exports = router;
