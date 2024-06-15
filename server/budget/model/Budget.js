@@ -9,7 +9,7 @@ const budgetSchema = mongoose.Schema({
         type: String
     }],
     labor: {
-        type: Number,
+        type: String,
         required: true
     },
     value: {
